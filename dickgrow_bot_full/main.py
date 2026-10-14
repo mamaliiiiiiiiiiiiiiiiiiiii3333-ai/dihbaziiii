@@ -172,7 +172,7 @@ DUEL_TOKEN_CHANCE = 0.7
 
 # ===== مالیات 🏛 =====
 # - مالیات کاشت: از صفحه‌ی ۴ پنل مزرعه به بعد (هر صفحه ۹ زمین) هر بار کاشتن ۱۰۰ سانت
-# - مالیات ثروت: هر ۲۴ ساعت ۵٪ سایز پولدارترین فرد هر گروه
+# - مالیات ثروت: هر ۲۴ ساعت ۵٪ ثروت پولدارترین فرد هر گروه (ثروت = سایز + اسپرم؛ اسپرم بورس هم حساب می‌شه)
 # - هر دو مالیات بین ۳ تا از فعال‌ترین بازیکنای گروه (به‌جز پرداخت‌کننده) پخش می‌شن؛ اگه فعالی نباشه می‌سوزن
 FARM_TAX_FROM_PAGE = 4
 TAX_RECIPIENTS = 3
@@ -184,6 +184,13 @@ TAX_EVASION_GAMES = 10
 TAX_EVASION_WINDOW = 24 * 3600
 # پولدارترین فرد گروه حداقل شرط دوئلش این درصد از سایزشه (تا با دوئل‌های ریز و الکی فرار مالیاتی نگیره)
 RICHEST_MIN_DUEL_PCT = 0.015
+
+# ===== بازار کریپتو (ثابت‌های قابل تنظیم؛ خود کوین‌ها بالای بخش کریپتو تعریف شدن) =====
+CRYPTO_FEE_PCT = 0.01            # کارمزد خرید و فروش
+CRYPTO_MIN_TRADE = 5             # حداقل معامله (سانت)
+CRYPTO_MAX_TRADE_PCT = 0.30      # سقف هر خرید/تزریق نسبت به سایز
+CRYPTO_COOLDOWN = 15             # ثانیه بین دو معامله‌ی یه نفر
+CRYPTO_INJECT_MIN = 20           # حداقل تزریق (سانت)
 FARM_PLANT_TAX = 100
 WEALTH_TAX_PCT = 0.05
 WEALTH_TAX_INTERVAL = 24 * 3600
@@ -248,7 +255,7 @@ HELP_SECTIONS = {
         "💰 /tocent [مقدار اسپرم] — تبدیل اسپرم به سانت\n"
         "🎟 /token — دیدن توکن‌ها و قیمت فعلی هر توکن\n"
         f"🛒 /buytoken [تعداد] — خرید توکن بازی (هر توکن = {int(TOKEN_PRICE_PCT*100)}٪ سایزت)\n"
-        f"🏛 /tax — مالیات: هر {WEALTH_TAX_INTERVAL//3600} ساعت {int(WEALTH_TAX_PCT*100)}٪ سایز پولدارترین فرد گروه کم می‌شه و بین {TAX_RECIPIENTS} فعال‌ترین بازیکن (بیشترین پیام تو {ACTIVITY_WINDOW_DAYS} روز اخیر) پخش می‌شه؛ این‌جا می‌بینی کی پولدارترینه و فعال‌ترین‌ها کی‌ان\n"
+        f"🏛 /tax — مالیات: هر {WEALTH_TAX_INTERVAL//3600} ساعت {int(WEALTH_TAX_PCT*100)}٪ ثروت پولدارترین فرد گروه (سایز + اسپرم + کوین؛ هر {SPERM_RATE} اسپرم = ۱ سانت و اسپرم بورس و کوین‌ها هم حساب می‌شن) کم می‌شه و بین {TAX_RECIPIENTS} فعال‌ترین بازیکن (بیشترین پیام تو {ACTIVITY_WINDOW_DAYS} روز اخیر) پخش می‌شه؛ این‌جا می‌بینی کی پولدارترینه و فعال‌ترین‌ها کی‌ان\n"
         f"🕵️ فرار مالیاتی: اگه تو {TAX_EVASION_WINDOW//3600} ساعت اخیر {TAX_EVASION_DUELS} دوئل (/pvp) و {TAX_EVASION_GAMES} مینی‌گیم (/box ، /climb ، /bj) انجام داده باشی از مالیات {int(WEALTH_TAX_PCT*100)}٪ پولدارترین معافی؛ مالیات مزرعه معافیت نداره (پیشرفتت تو /tax)\n\n"
         "🎮 بازی‌های سریع (جعبه، نردبان، بلک‌جک) تو بخش «مینی‌گیم‌ها» هستن و برای هر دست توکن می‌خوان."
     ),
@@ -302,6 +309,28 @@ HELP_SECTIONS = {
         "• اگه دیلر کارت رویی ضعیف داره (۲ تا ۶)، احتمال سوختنش بالاست.\n"
         "• دابل و اسپلیت نداره، بازی ساده‌ست.\n\n"
         "⏳ هر نفر تو هر گروه فقط یه دست فعال داره. اگه ۳ دقیقه هیچ حرکتی نکنی خودکار «بایست» زده می‌شه، و با ریستارت ربات هم دستت گم نمی‌شه."
+    ),
+    "crypto": (
+        "🪙 بازار کریپتو",
+        "بازار مشترک هر گروه؛ واحد همه‌چیز سانته. هر کوین «پول رسمی» یه حزبه و هرچی شرکت‌های اون حزب موفق‌تر باشن، کوینش ارزشمندتر می‌شه (مثل دنیای واقعی).\n\n"
+        "🟠 BTK بیتکیر | 🔷 ETK اترکص | 🍈 BGT بیگتیت (پرنوسان)\n\n"
+        "🔒 معامله (خرید، فروش، تزریق) فقط تو پیوی ربات انجام می‌شه تا کسی نفهمه چی می‌خری؛ اگه تو گروه بزنی ربات می‌فرستتت پیوی. اگه تو چند گروه بازی می‌کنی با /tgroup گروه رو انتخاب کن. خبرِ معامله‌های خیلی بزرگ تو گروه میاد ولی اسم نهنگ ناشناسه.\n\n"
+        "🛒 /cbuy [کوین] [سانت] — خرید (مثلاً /cbuy BTK 100)\n"
+        "💰 /csell [کوین] [مقدار یا all] — فروش\n"
+        "📈 /cchart [کوین] — چارت قیمت | 🪙 /crypto — قیمت‌ها | 👛 /cwallet — کیف پول\n"
+        "💉 /cinject [کوین] [سانت] — تزریق به بازار: سانتت بدون گرفتن کوین می‌ره تو استخر و قیمت بالا می‌ره (برای همه‌ی دارنده‌ها)؛ تو اخبار اعلام می‌شه\n"
+        "📰 /cnews — اخبار بازار (معامله‌ی سنگین، تزریق، ورود شرکت‌ها به حزب‌ها، فروش اجباری مالیات)\n"
+        "📊 هر ۱۰ دقیقه بازار یه قدم حرکت می‌کنه و چارت عکسی تو گروه میاد (ادمین با /cauto خاموش/روشنش می‌کنه)\n\n"
+        "⚙️ قیمت چطور ساخته می‌شه؟\n"
+        "هر کوین یه استخر نقدینگی داره (قیمت = سانتِ استخر ÷ کوینِ استخر). خرید قیمت رو بالا می‌بره و فروش پایین میاره؛ هرچی معامله بزرگ‌تر، اثرش بیشتر (اسلیپیج). کوین‌های کم‌عمق مثل BGT خیلی تکون می‌خورن.\n\n"
+        "🏛 حزب‌ها\n"
+        "/party — وضعیت حزب‌ها، شرکت‌هاشون و قدرت اقتصادی‌شون\n"
+        "برنده‌ی هر شرکت تو بورس (/copen) خودش با /joinparty [شماره شرکت] [کوین] انتخاب می‌کنه شرکتش پشت کدوم حزب (و پول رسمی) وایسته؛ بعد از انتخاب ۲۴ ساعت نمی‌تونه عوضش کنه، و شرکتِ بدون حزب به هیچ کوینی کمک نمی‌کنه. قدرت یه حزب = جمع ارزش شرکت‌هایی که پشتشونن (نسبت به میانگین حزب‌ها). ارزش واقعی کوین = قیمت پایه × سیکل بازار × حال‌وهوای خبرها × قدرت حزب؛ و ربات‌های بازارساز هر ۱۰ دقیقه قیمت رو به‌سمت همین ارزش می‌برن. شرکتی که به یه حزب بپیونده کوینش رو بالا می‌بره، رفتنش یا نقد کردن (/cashout) ارزش شرکت، حزب رو ضعیف می‌کنه.\n\n"
+        "📏 قوانین\n"
+        f"• کارمزد هر خرید و فروش {int(CRYPTO_FEE_PCT*100)}٪ (بین فعال‌ترین بازیکنا پخش می‌شه)\n"
+        f"• حداقل معامله {CRYPTO_MIN_TRADE} سانت؛ هر خرید یا تزریق حداکثر {int(CRYPTO_MAX_TRADE_PCT*100)}٪ سایزت\n"
+        f"• بین دو معامله {CRYPTO_COOLDOWN} ثانیه صبر کن\n"
+        "• ارزش کوین‌ها (با اسلیپیج فروش) تو ثروتِ مالیات ۵٪ پولدارترین حساب می‌شه؛ اگه سانت و اسپرم کافی نباشه کوین‌هاش اجباری فروخته می‌شن"
     ),
     "pvp": (
         "⚔️ دوئل و رنک",
@@ -376,6 +405,7 @@ def help_main_kb():
         [InlineKeyboardButton(text="💰 اقتصاد پایه", callback_data="help:econ")],
         [InlineKeyboardButton(text="🎮 مینی‌گیم‌ها", callback_data="help:games")],
         [InlineKeyboardButton(text="🃏 بلک‌جک", callback_data="help:blackjack")],
+        [InlineKeyboardButton(text="🪙 کریپتو", callback_data="help:crypto")],
         [InlineKeyboardButton(text="⚔️ دوئل و رنک", callback_data="help:pvp")],
         [InlineKeyboardButton(text="🔫 مافیا", callback_data="help:mafia")],
         [InlineKeyboardButton(text="🌟 سلبریتی‌ها", callback_data="help:celeb")],
@@ -2737,6 +2767,7 @@ async def reset_group(m: Message):
         "company_rounds", "company_options", "company_investments",
         "company_participants", "owned_companies",
         "farm_tiles", "farm_inventory", "farm_records", "auctions", "climb_games", "blackjack_games", "wealth_tax", "activity", "play_log",
+        "crypto_pools", "crypto_wallet", "crypto_prices", "crypto_npc", "crypto_settings", "crypto_news",
     ):
         c.execute(f"DELETE FROM {table} WHERE chat_id=?", (chat_id,))
     # جدول‌هایی که فقط از طریق battle_id به گروه وصلن
@@ -2972,6 +3003,7 @@ async def company_open(m: Message):
     txt = f"📈 یه بازار بورس جدید باز شد! (بازار شماره‌ی #{new_round})\n\n"
     for i, (name, mb) in enumerate(zip(names, min_budgets), 1):
         txt += f"{i}. {name} (حداقل بودجه: {mb} اسپرم)\n"
+    txt += "\n🏛 برنده‌ی هر شرکت بعداً با /joinparty انتخاب می‌کنه شرکتش پشت کدوم حزب (و پول رسمی) وایسته. وضعیت حزب‌ها: /party\n"
     txt += (
         f"\n🧬 هر سرمایه‌گذاری باید حداقل {int(COMPANY_MIN_INVEST_PCT*100)}٪ اسپرمت باشه؛ سقفی نداره!\n"
         f"(نداری؟ با /tosperm سانتت رو تبدیل کن — هر ۱ سانت = {SPERM_RATE} اسپرم)\n\n"
@@ -3147,24 +3179,28 @@ async def company_close(m: Message):
             "INSERT INTO owned_companies(chat_id,owner_id,name,value,workers,last_payout) VALUES(?,?,?,?,?,?)",
             (m.chat.id, winner_id, name, total, workers, now)
         )
+        new_cid = c.lastrowid
         winner_name = get_name(m.chat.id, winner_id)
-        txt += f"👑 {name} ({total} اسپرم) — برنده: {winner_name} (سهم {winner_amount} اسپرم)\n"
+        txt += f"👑 #{new_cid} {name} ({total} اسپرم) — برنده: {winner_name} (سهم {winner_amount} اسپرم)\n"
 
     c.execute("UPDATE company_rounds SET status='closed' WHERE chat_id=? AND round_id=?", (m.chat.id, round_id))
     db.commit()
+    if "👑" in txt:
+        txt += ("\n🏛 صاحب‌های شرکت‌ها: با /joinparty [شماره شرکت] [کوین] حزب شرکتتون رو انتخاب کنین "
+                "(مثلاً /joinparty 5 BTK). تا حزب انتخاب نشه، شرکت به هیچ کوینی کمک نمی‌کنه. لیست حزب‌ها: /party\n")
     await m.reply(txt)
 
 
 @dp.message(Command("mycompanies"))
 async def my_companies(m: Message):
-    rows = c.execute("SELECT id,name,value,workers,workers_bought,workers_used_mafia FROM owned_companies WHERE chat_id=? AND owner_id=?", (m.chat.id, m.from_user.id)).fetchall()
+    rows = c.execute("SELECT id,name,value,workers,workers_bought,workers_used_mafia,party FROM owned_companies WHERE chat_id=? AND owner_id=?", (m.chat.id, m.from_user.id)).fetchall()
     if not rows:
         return await m.reply("📭 هنوز هیچ شرکتی نداری! وقتی بازار بورس بازه با /invest شرکت کن.")
     txt = "🏢 شرکت‌های تو:\n\n"
-    for cid, name, value, workers, bought, used in rows:
+    for cid, name, value, workers, bought, used, party in rows:
         income = int(value * COMPANY_DIVIDEND_PCT)
         available = bought - used
-        txt += f"#{cid} {name}\n🧬 ارزش: {value} اسپرم | 📈 سود روزانه: {income} اسپرم\n👥 یار: {bought}/{workers} خریداری‌شده ({available} آماده‌ی استفاده با /useyar)\n\n"
+        txt += f"#{cid} {name}{party_tag(party)}\n🧬 ارزش: {value} اسپرم | 📈 سود روزانه: {income} اسپرم\n👥 یار: {bought}/{workers} خریداری‌شده ({available} آماده‌ی استفاده با /useyar)\n\n"
     await m.reply(txt)
 
 
@@ -3265,10 +3301,10 @@ async def cashout_company(m: Message):
         cid = int(m.text.split()[1])
     except:
         return await m.reply("Usage: /cashout [شماره شرکت] (شماره‌ها رو از /mycompanies ببین)")
-    row = c.execute("SELECT owner_id,name,value FROM owned_companies WHERE id=? AND chat_id=?", (cid, m.chat.id)).fetchone()
+    row = c.execute("SELECT owner_id,name,value,party FROM owned_companies WHERE id=? AND chat_id=?", (cid, m.chat.id)).fetchone()
     if not row:
         return await m.reply("❌ همچین شرکتی پیدا نشد.")
-    owner_id, name, value = row
+    owner_id, name, value, party = row
     if owner_id != m.from_user.id:
         return await m.reply("❌ این شرکت مال تو نیست!")
     cashed = value // 2
@@ -3277,6 +3313,8 @@ async def cashout_company(m: Message):
     c.execute("UPDATE owned_companies SET value=value-? WHERE id=?", (cashed, cid))
     c.execute("UPDATE users SET sperm=sperm+? WHERE chat_id=? AND user_id=?", (cashed, m.chat.id, m.from_user.id))
     db.commit()
+    if party in COINS:
+        party_company_event(m.chat.id, party, name, cashed, False)
     await m.reply(f"🧬 نصف ارزش «{name}» نقد شد!\n💰 {cashed} اسپرم به حسابت اضافه شد.\n📉 ارزش باقی‌مونده‌ی شرکت: {value-cashed} اسپرم\n(برای تبدیل به سانت: /tocent)")
 
 
@@ -3887,7 +3925,7 @@ def richest_min_duel(chat_id, uid):
     row = get_richest(chat_id)
     if not row or row[0] != uid or row[1] <= 0:
         return 0
-    return max(1, math.ceil(round(row[1] * RICHEST_MIN_DUEL_PCT, 6)))
+    return max(1, math.ceil(round(get_size(chat_id, uid) * RICHEST_MIN_DUEL_PCT, 6)))  # درصد از سایز واقعی (شرط دوئل با سانته)
 
 def evade_status_text(chat_id, uid):
     ex, nd, ng = tax_exempt(chat_id, uid)
@@ -3904,10 +3942,34 @@ c.execute("""CREATE TABLE IF NOT EXISTS wealth_tax(
 )""")
 db.commit()
 
-def get_richest(chat_id):
+# ثروت (به سانت) = سایز + اسپرم آزاد و اسپرمِ سرمایه‌گذاری‌شده تو بورس‌های باز (هر SPERM_RATE اسپرم = ۱ سانت)
+# تا کسی با نگه داشتن اسپرم یا قایم کردنش تو بورس از مالیات فرار نکنه.
+def invested_sperm(chat_id, uid):
     return c.execute(
-        "SELECT user_id,size FROM users WHERE chat_id=? ORDER BY size DESC, user_id LIMIT 1", (chat_id,)
-    ).fetchone()
+        "SELECT COALESCE(SUM(ci.amount),0) FROM company_investments ci "
+        "JOIN company_rounds cr ON cr.chat_id=ci.chat_id AND cr.round_id=ci.round_id AND cr.status='open' "
+        "WHERE ci.chat_id=? AND ci.user_id=?",
+        (chat_id, uid)
+    ).fetchone()[0]
+
+def net_worth(chat_id, uid):
+    return get_size(chat_id, uid) + (get_sperm(chat_id, uid) + invested_sperm(chat_id, uid)) // SPERM_RATE + crypto_value_of(chat_id, uid)
+
+def get_richest(chat_id):
+    """خروجی: (user_id, ثروت به سانت) پولدارترین؛ ثروت = سایز + اسپرم (آزاد و بورس) + ارزش کوین‌ها. مساوی بود کم‌ترین user_id."""
+    rows = c.execute(
+        "SELECT u.user_id, "
+        "u.size + (COALESCE(u.sperm,0) + COALESCE((SELECT SUM(ci.amount) FROM company_investments ci "
+        "JOIN company_rounds cr ON cr.chat_id=ci.chat_id AND cr.round_id=ci.round_id AND cr.status='open' "
+        "WHERE ci.chat_id=u.chat_id AND ci.user_id=u.user_id),0)) / ? AS worth "
+        "FROM users u WHERE u.chat_id=?",
+        (SPERM_RATE, chat_id)
+    ).fetchall()
+    if not rows:
+        return None
+    crypto = crypto_values(chat_id)
+    best = max(rows, key=lambda r: (r[1] + crypto.get(r[0], 0), -r[0]))
+    return (best[0], best[1] + crypto.get(best[0], 0))
 
 def wealth_tax_amount(size_cm):
     return 0 if size_cm <= 0 else max(1, int(size_cm * WEALTH_TAX_PCT + 0.5))
@@ -3916,34 +3978,62 @@ async def apply_wealth_tax(bot, chat_id):
     row = get_richest(chat_id)
     if not row or row[1] <= 0:
         return
-    uid, size_cm = row
+    uid, worth = row
+    size_cm = get_size(chat_id, uid)
+    free_sperm = get_sperm(chat_id, uid)
+    sperm_cm = (free_sperm + invested_sperm(chat_id, uid)) // SPERM_RATE
+    coin_cm = crypto_value_of(chat_id, uid)
     exempt, nd, ng = tax_exempt(chat_id, uid)
     if exempt:
         await bot.send_message(
             chat_id,
             f"🕵️ فرار مالیاتی موفق!\n\n"
-            f"👑 {get_name(chat_id, uid)} پولدارترین فرد گروهه ولی تو {TAX_EVASION_WINDOW//3600} ساعت اخیر "
-            f"{nd} دوئل و {ng} بازی انجام داد و از مالیات امروز معاف شد.\n"
-            f"📏 سایزش: {size_cm} سانت\n\n"
+            f"👑 {get_name(chat_id, uid)} پولدارترین فرد گروهه (ثروت {worth} سانت) ولی تو {TAX_EVASION_WINDOW//3600} ساعت اخیر "
+            f"{nd} دوئل و {ng} بازی انجام داد و از مالیات امروز معاف شد.\n\n"
             f"⏳ مالیات بعدی {WEALTH_TAX_INTERVAL//3600} ساعت دیگه"
         )
         return
-    tax = min(size_cm, wealth_tax_amount(size_cm))
-    c.execute("UPDATE users SET size=size-? WHERE chat_id=? AND user_id=?", (tax, chat_id, uid))
-    payouts = distribute_tax(chat_id, uid, tax)
+    tax = wealth_tax_amount(worth)  # ۵٪ کل ثروت (سایز + اسپرم + کوین)
+    from_size = min(size_cm, tax)
+    rest = tax - from_size
+    cm_from_sperm = min(free_sperm // SPERM_RATE, rest)  # کمبود رو از اسپرم آزاد برمی‌داریم
+    from_sperm = cm_from_sperm * SPERM_RATE
+    rest -= cm_from_sperm
+    from_coin, sold = 0, []
+    if rest > 0 and coin_cm > 0:  # هنوز کمبود هست: کوین‌ها اجباری فروخته می‌شن
+        got, sold = liquidate_for_tax(chat_id, uid, rest)
+        from_coin = min(got, rest)
+        if got > from_coin:  # اضافه‌ی فروش به سایز برمی‌گرده
+            c.execute("UPDATE users SET size=size+? WHERE chat_id=? AND user_id=?", (got - from_coin, chat_id, uid))
+    paid = from_size + cm_from_sperm + from_coin
+    if paid <= 0:
+        return
+    c.execute(
+        "UPDATE users SET size=size-?, sperm=sperm-? WHERE chat_id=? AND user_id=?",
+        (from_size, from_sperm, chat_id, uid)
+    )
+    payouts = distribute_tax(chat_id, uid, paid)
+    if sold:
+        add_news(chat_id, "⚖️ فروش اجباری برای مالیات: " + "، ".join(
+            f"{fmt_qty(q)} {COINS[sym]['emoji']} {sym}" for sym, q, _g in sold) + f" از {get_name(chat_id, uid)} فروخته شد")
     db.commit()
     if payouts:
         dist = f"\n\n🏆 مالیات بین {len(payouts)} فعال‌ترین بازیکن پخش شد:\n" + "\n".join(
             f"🎁 {get_name(chat_id, u)}: +{amt} سانت" for u, amt in payouts)
     else:
         dist = "\n\n(بازیکن فعالی ثبت نشده بود؛ این بار مالیات سوخت.)"
+    src_txt = f"از سایز {from_size} سانت"
+    if from_sperm:
+        src_txt += f" + از اسپرم {from_sperm} اسپرم"
+    if from_coin:
+        src_txt += f" + فروش اجباری کوین {from_coin} سانت"
     await bot.send_message(
         chat_id,
         f"🏛 مالیات روزانه!\n\n"
         f"👑 پولدارترین فرد گروه: {get_name(chat_id, uid)}\n"
-        f"📏 سایز قبل از مالیات: {size_cm} سانت\n"
-        f"💸 مالیات {int(WEALTH_TAX_PCT*100)}٪: {tax} سانت\n"
-        f"📏 سایز الان: {get_size(chat_id, uid)} سانت"
+        f"📏 سایز: {size_cm} سانت | 🧬 اسپرم: ≈ {sperm_cm} سانت | 🪙 کوین: ≈ {coin_cm} سانت\n"
+        f"💎 ثروت کل: {worth} سانت\n"
+        f"💸 مالیات {int(WEALTH_TAX_PCT*100)}٪: {tax} سانت ({src_txt})"
         f"{dist}\n\n"
         f"⏳ مالیات بعدی {WEALTH_TAX_INTERVAL//3600} ساعت دیگه"
     )
@@ -3986,7 +4076,7 @@ async def tax_info(m: Message):
         when = "تایمرش هنوز شروع نشده (تا چند دقیقه‌ی دیگه شروع می‌شه)"
     rich = get_richest(chat_id)
     if rich and rich[1] > 0:
-        rich_txt = f"👑 الان پولدارترین: {get_name(chat_id, rich[0])} ({rich[1]} سانت) → مالیاتش: {min(rich[1], wealth_tax_amount(rich[1]))} سانت"
+        rich_txt = f"👑 الان پولدارترین: {get_name(chat_id, rich[0])} (ثروت {rich[1]} سانت، با احتساب اسپرم و کوین) → مالیاتش: {wealth_tax_amount(rich[1])} سانت"
         active = top_active(chat_id, rich[0])
     else:
         rich_txt = "👑 هنوز کسی سایز نداره."
@@ -3997,7 +4087,8 @@ async def tax_info(m: Message):
         act_txt = "🏆 هنوز فعالی ثبت نشده (فعالیت از وقتی ربات آپدیت شد شمرده می‌شه)."
     await m.reply(
         "🏛 مالیات\n\n"
-        f"💰 مالیات ثروت: هر {WEALTH_TAX_INTERVAL//3600} ساعت {int(WEALTH_TAX_PCT*100)}٪ سایز پولدارترین فرد گروه کم می‌شه و بین {TAX_RECIPIENTS} فعال‌ترین بازیکن پخش می‌شه.\n"
+        f"💰 مالیات ثروت: هر {WEALTH_TAX_INTERVAL//3600} ساعت {int(WEALTH_TAX_PCT*100)}٪ ثروت پولدارترین فرد گروه کم می‌شه و بین {TAX_RECIPIENTS} فعال‌ترین بازیکن پخش می‌شه.\n"
+        f"🧬 ثروت = سایز + اسپرم + کوین (هر {SPERM_RATE} اسپرم = ۱ سانت؛ اسپرم بورس باز و ارزش کوین‌ها با اسلیپیج فروش هم حساب می‌شه). نگه داشتن اسپرم یا کوین راه فرار نیست؛ اگه سانت و اسپرم کافی نباشه کوین‌ها اجباری فروخته می‌شن!\n"
         f"{rich_txt}\n"
         f"{act_txt}\n"
         f"⏳ مالیات بعدی: {when}\n\n"
@@ -4006,6 +4097,899 @@ async def tax_info(m: Message):
         f"📊 «فعال» یعنی بیشترین پیام تو گروه تو {ACTIVITY_WINDOW_DAYS} روز اخیر.\n\n"
         f"{evade_status_text(chat_id, m.from_user.id)}"
     )
+
+# ===== بازار کریپتو 🪙 (هسته‌ی محاسبات) =====
+# - واحد همه‌چیز سانته: قیمت کوین، کارمزد و مالیات
+# - هر کوین «پول رسمی» یه حزبه (BTK بیتکیر، ETK اترکص، BGT بیگتیت). صاحب هر شرکتِ بورس خودش یکی از این حزب‌ها رو انتخاب می‌کنه (/joinparty).
+# - بدون تیک رندوم، ولی قیمت خودش حرکت می‌کنه: هر ۱۰ دقیقه «ربات‌های بازارساز» (یکی ارزش‌گرا، یکی روندگرا) با سرمایه‌ی محدود
+#   قیمت رو به‌سمت «ارزش واقعی» می‌برن. ارزش واقعی = قیمت پایه × سیکل بازار × حال‌وهوا (اخبار و معامله‌های بزرگ) × قدرت حزب
+# - قدرت حزب = جمع ارزش (اسپرم) شرکت‌هایی که ازش حمایت می‌کنن، نسبت به میانگین حزب‌ها (با کف و سقف)؛ هرچی شرکت‌ها موفق‌تر، کوین بهتر
+# - هر کوین یه استخر نقدینگی (x*y=k) داره و قیمت = سانتِ استخر ÷ کوینِ استخر.
+#   خرید قیمت رو بالا می‌بره، فروش پایین میاره، و تزریق (سانت بی‌کوین به استخر) قیمت رو هل می‌ده.
+# - اخبار از اتفاق‌های واقعی بازار ساخته می‌شن (معامله‌ی سنگین، تزریق، ورود شرکت به حزب، نقد کردن شرکت، فروش اجباری مالیات)
+# - کارمزد معامله‌ها بین فعال‌ترین بازیکنا پخش می‌شه (مثل مالیات)
+# - ارزش کوین‌ها تو ثروتِ مالیات ۵٪ حساب می‌شه؛ اگه سانت و اسپرم برای مالیات کافی نباشه کوین‌ها اجباری فروخته می‌شن
+COINS = {
+    "BTK": {"emoji": "🟠", "name": "بیتکیر", "party": "حزب بیتکیر", "price": 200.0, "depth": 40000.0, "cycle": (0.10, 9.0, 0.04, 2.7)},
+    "ETK": {"emoji": "🔷", "name": "اترکص",  "party": "حزب اترکص",  "price": 50.0,  "depth": 10000.0, "cycle": (0.18, 6.0, 0.07, 1.9)},
+    "BGT": {"emoji": "🍈", "name": "بیگتیت", "party": "حزب بیگتیت", "price": 5.0,   "depth": 2000.0,  "cycle": (0.30, 4.0, 0.12, 1.3)},
+}
+COIN_ALIASES = {"بیتکیر": "BTK", "اترکص": "ETK", "بیگتیت": "BGT"}   # اسم فارسی هم تو دستورها قبول می‌شه
+OLD_COIN_NAMES = {"USD": "BTK", "SPM": "ETK", "MOON": "BGT"}      # برای مهاجرت دیتابیس قدیمی
+PARTY_SMOOTH = 50          # هرچی بیشتر، قدرت حزب‌ها تو شروع بازی کمتر از هم فاصله می‌گیره
+PARTY_EXPONENT = 0.6       # شدت اثر قدرت حزب روی ارزش واقعی کوین (۰ = بی‌اثر)
+PARTY_FACTOR_MIN = 0.6     # کف ضریب (حزب بدون شرکت)
+PARTY_FACTOR_MAX = 1.8     # سقف ضریب
+PARTY_NEWS_KICK = 0.10     # فشار فوریِ «حال‌وهوا» وقتی شرکت به حزب می‌پیونده، ازش می‌ره یا نقد می‌شه
+PARTY_SWITCH_COOLDOWN = 24 * 3600  # بعد از انتخاب حزب، تا این مدت نمی‌شه عوضش کرد (اولین انتخاب آزاده)
+CRYPTO_NEWS_MOVE_PCT = 0.08      # معامله‌ای که قیمت رو این‌قدر جابه‌جا کنه خبر می‌شه
+CRYPTO_SNAPSHOT_INTERVAL = 600   # هر ۱۰ دقیقه: یه قدم حرکت بازار + یه نمودار خودکار تو گروه
+CRYPTO_NPC_FRACTION = 0.12       # سرمایه‌ی ربات‌های بازارساز نسبت به استخر (یه‌بار تو شروع)
+CRYPTO_NPC_SPEED = 0.30          # هر قدم، ربات «ارزش‌گرا» چند درصد از فاصله‌ی قیمت تا ارزش واقعی رو پر می‌کنه
+CRYPTO_NPC_MOMENTUM = 0.35       # ربات «روندگرا» چند درصد از حرکت قبلی رو ادامه می‌ده
+CRYPTO_NPC_MAX_MOVE = 0.05       # حداکثر حرکت ربات‌ها تو هر قدم (۱۰ دقیقه)
+CRYPTO_SENT_HALFLIFE = 3 * 3600  # نیمه‌عمر اثر اخبار و معامله‌های بزرگ روی «حال‌وهوای بازار»
+CRYPTO_NEWS_STEP_PCT = 0.05      # حرکت ۱۰ دقیقه‌ای بیشتر از این = خبر «موج خرید/فروش»
+CRYPTO_CHART_HOURS = 6           # نمودار خودکار چند ساعت اخیر رو نشون بده
+
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_pools(
+    chat_id INTEGER, coin TEXT, cm REAL, qty REAL,
+    PRIMARY KEY(chat_id, coin))""")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_wallet(
+    chat_id INTEGER, user_id INTEGER, coin TEXT, qty REAL DEFAULT 0,
+    PRIMARY KEY(chat_id, user_id, coin))""")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_prices(
+    chat_id INTEGER, coin TEXT, ts INTEGER, price REAL)""")
+c.execute("CREATE INDEX IF NOT EXISTS idx_crypto_prices ON crypto_prices(chat_id, coin, ts)")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_news(
+    chat_id INTEGER, ts INTEGER, text TEXT)""")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_npc(
+    chat_id INTEGER, coin TEXT, cm REAL, qty REAL, sentiment REAL DEFAULT 0, last_price REAL DEFAULT 0, last_step INTEGER DEFAULT 0,
+    PRIMARY KEY(chat_id, coin))""")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_settings(
+    chat_id INTEGER PRIMARY KEY, auto_chart INTEGER DEFAULT 1)""")
+db.commit()
+
+# ---- مهاجرت دیتابیس قدیمی: اسم جدید کوین‌ها + ستون حزب برای شرکت‌ها ----
+for _old, _new in OLD_COIN_NAMES.items():
+    for _tbl in ("crypto_pools", "crypto_wallet", "crypto_prices", "crypto_npc"):
+        c.execute(f"UPDATE OR IGNORE {_tbl} SET coin=? WHERE coin=?", (_new, _old))
+for _col in ("party TEXT", "party_changed INTEGER DEFAULT 0"):  # حزب هر شرکت (خالی = بدون حزب) و زمان آخرین انتخاب
+    try:
+        c.execute(f"ALTER TABLE owned_companies ADD COLUMN {_col}")
+    except sqlite3.OperationalError:
+        pass
+db.commit()
+
+def fmt_price(x):
+    return f"{x:,.2f}" if x < 1000 else f"{x:,.0f}"
+
+def fmt_qty(x):
+    return f"{x:,.4f}".rstrip("0").rstrip(".") or "0"
+
+def crypto_init(chat_id):
+    """استخرها، سرمایه‌ی ربات‌های بازارساز و تنظیمات این گروه رو (اگه نبودن) می‌سازه."""
+    now = int(time.time())
+    for sym, cfg in COINS.items():
+        if not c.execute("SELECT 1 FROM crypto_pools WHERE chat_id=? AND coin=?", (chat_id, sym)).fetchone():
+            cm = cfg["depth"]
+            c.execute("INSERT INTO crypto_pools(chat_id,coin,cm,qty) VALUES(?,?,?,?)", (chat_id, sym, cm, cm / cfg["price"]))
+            c.execute("INSERT INTO crypto_prices(chat_id,coin,ts,price) VALUES(?,?,?,?)", (chat_id, sym, now, cfg["price"]))
+        cm, q = pool_get(chat_id, sym)
+        c.execute(
+            "INSERT OR IGNORE INTO crypto_npc(chat_id,coin,cm,qty,sentiment,last_price,last_step) VALUES(?,?,?,?,0,?,?)",
+            (chat_id, sym, cm * CRYPTO_NPC_FRACTION, q * CRYPTO_NPC_FRACTION, cm / q, now)
+        )
+    c.execute("INSERT OR IGNORE INTO crypto_settings(chat_id,auto_chart) VALUES(?,1)", (chat_id,))
+    db.commit()
+
+def pool_get(chat_id, sym):
+    return c.execute("SELECT cm,qty FROM crypto_pools WHERE chat_id=? AND coin=?", (chat_id, sym)).fetchone()
+
+def pool_price(chat_id, sym):
+    row = pool_get(chat_id, sym)
+    return row[0] / row[1] if row and row[1] > 0 else 0.0
+
+def pool_set(chat_id, sym, cm, qty):
+    c.execute("UPDATE crypto_pools SET cm=?, qty=? WHERE chat_id=? AND coin=?", (cm, qty, chat_id, sym))
+    c.execute("INSERT INTO crypto_prices(chat_id,coin,ts,price) VALUES(?,?,?,?)", (chat_id, sym, int(time.time()), cm / qty))
+
+def add_sentiment(chat_id, sym, delta):
+    """اخبار و معامله‌های بزرگ حال‌وهوای بازار رو عوض می‌کنن (به‌مرور محو می‌شه)."""
+    c.execute(
+        "UPDATE crypto_npc SET sentiment=MAX(-0.5, MIN(0.8, sentiment+?)) WHERE chat_id=? AND coin=?",
+        (delta, chat_id, sym)
+    )
+
+def cycle_factor(chat_id, sym, t):
+    """سیکل بازار: دو موج با دوره‌ی متفاوت (قطعی، نه رندوم). هر گروه فاز خودش رو داره."""
+    a1, p1, a2, p2 = COINS[sym]["cycle"]
+    h = t / 3600.0
+    ph = (abs(chat_id) % 97) / 97 * 2 * math.pi
+    return 1 + a1 * math.sin(2 * math.pi * h / p1 + ph) + a2 * math.sin(2 * math.pi * h / p2 + 1.3 + ph)
+
+def fair_value(chat_id, sym, t, sentiment=0.0):
+    """ارزش واقعی کوین (سانت) = قیمت پایه × سیکل × حال‌وهوا × قدرت حزب (هرچی شرکت‌های حزب موفق‌تر، ارزش بیشتر)."""
+    cfg = COINS[sym]
+    return cfg["price"] * cycle_factor(chat_id, sym, t) * (1 + sentiment) * party_factor(chat_id, sym)
+
+def market_step(chat_id):
+    """یه قدم حرکت بازار (هر ۱۰ دقیقه): ربات‌های بازارساز قیمت رو به‌سمت ارزش واقعی می‌برن.
+    ربات ارزش‌گرا فاصله‌ی قیمت تا ارزش واقعی رو کم می‌کنه؛ ربات روندگرا حرکت قبلی (از جمله حرکت بازیکنا) رو ادامه می‌ده.
+    ربات‌ها سرمایه‌ی محدود دارن (سانت و کوین)، پس نمی‌تونن قیمت رو بی‌نهایت هل بدن.
+    خروجی: لیست خبرهای این قدم."""
+    now = int(time.time())
+    news = []
+    for sym, cfg in COINS.items():
+        pool = pool_get(chat_id, sym)
+        npc = c.execute(
+            "SELECT cm,qty,sentiment,last_price,last_step FROM crypto_npc WHERE chat_id=? AND coin=?", (chat_id, sym)
+        ).fetchone()
+        if not pool or not npc:
+            continue
+        cm, q = pool
+        ncm, nq, sent, last_p, last_t = npc
+        sent *= 0.5 ** (max(0, now - last_t) / CRYPTO_SENT_HALFLIFE)
+        p = cm / q
+        fair = fair_value(chat_id, sym, now, sent)
+        mom = (p / last_p - 1) if last_p > 0 else 0.0
+        target = p + CRYPTO_NPC_SPEED * (fair - p) + CRYPTO_NPC_MOMENTUM * mom * p
+        target = min(p * (1 + CRYPTO_NPC_MAX_MOVE), max(p * (1 - CRYPTO_NPC_MAX_MOVE), target))
+        k = cm * q
+        new_cm = math.sqrt(k * target)
+        cm2, q2 = cm, q
+        if new_cm > cm:  # ربات‌ها می‌خرن
+            need = min(new_cm - cm, ncm)
+            if need > 0.01:
+                coin_out = q - k / (cm + need)
+                cm2, q2 = cm + need, q - coin_out
+                ncm -= need
+                nq += coin_out
+        else:  # ربات‌ها می‌فروشن
+            qty_in = min(k / new_cm - q, nq)
+            if qty_in > 1e-9:
+                cm_out = cm - k / (q + qty_in)
+                cm2, q2 = cm - cm_out, q + qty_in
+                ncm += cm_out
+                nq -= qty_in
+        pool_set(chat_id, sym, cm2, q2)
+        p_new = cm2 / q2
+        c.execute(
+            "UPDATE crypto_npc SET cm=?, qty=?, sentiment=?, last_price=?, last_step=? WHERE chat_id=? AND coin=?",
+            (ncm, nq, sent, p_new, now, chat_id, sym)
+        )
+        mv = (p_new / last_p - 1) if last_p > 0 else 0.0
+        if abs(mv) >= CRYPTO_NEWS_STEP_PCT and not c.execute(
+            "SELECT 1 FROM crypto_news WHERE chat_id=? AND ts>? AND text LIKE ?", (chat_id, now - 3600, f"%موج%{sym}%")
+        ).fetchone():
+            txt = (f"📈 موج خرید روی {cfg['emoji']} {sym}! قیمت تو ۱۰ دقیقه‌ی گذشته {mv*100:+.1f}٪ بالا رفت (الان {fmt_price(p_new)})"
+                   if mv > 0 else
+                   f"📉 موج فروش روی {cfg['emoji']} {sym}! قیمت تو ۱۰ دقیقه‌ی گذشته {mv*100:+.1f}٪ افت کرد (الان {fmt_price(p_new)})")
+            add_news(chat_id, txt)
+            news.append(txt)
+    db.commit()
+    return news
+
+def wallet_get(chat_id, uid, sym):
+    row = c.execute("SELECT qty FROM crypto_wallet WHERE chat_id=? AND user_id=? AND coin=?", (chat_id, uid, sym)).fetchone()
+    return row[0] if row else 0.0
+
+def wallet_add(chat_id, uid, sym, delta):
+    if delta >= 0:
+        c.execute(
+            "INSERT INTO crypto_wallet(chat_id,user_id,coin,qty) VALUES(?,?,?,?) "
+            "ON CONFLICT(chat_id,user_id,coin) DO UPDATE SET qty=qty+excluded.qty",
+            (chat_id, uid, sym, delta)
+        )
+    else:
+        c.execute(
+            "UPDATE crypto_wallet SET qty=MAX(0, qty+?) WHERE chat_id=? AND user_id=? AND coin=?",
+            (delta, chat_id, uid, sym)
+        )
+
+def add_news(chat_id, text):
+    c.execute("INSERT INTO crypto_news(chat_id,ts,text) VALUES(?,?,?)", (chat_id, int(time.time()), text))
+
+def change_24h(chat_id, sym):
+    now = int(time.time())
+    row = c.execute(
+        "SELECT price FROM crypto_prices WHERE chat_id=? AND coin=? AND ts<=? ORDER BY ts DESC LIMIT 1",
+        (chat_id, sym, now - 86400)
+    ).fetchone() or c.execute(
+        "SELECT price FROM crypto_prices WHERE chat_id=? AND coin=? ORDER BY ts ASC LIMIT 1", (chat_id, sym)
+    ).fetchone()
+    cur = pool_price(chat_id, sym)
+    return (cur / row[0] - 1) if row and row[0] > 0 else 0.0
+
+def sell_value(chat_id, sym, qty):
+    """سانتی که با فروش qty کوین (با اسلیپیج، قبل از کارمزد) به‌دست میاد."""
+    row = pool_get(chat_id, sym)
+    if not row or qty <= 0:
+        return 0
+    cm, q = row
+    return int(cm - (cm * q) / (q + qty))
+
+def crypto_values(chat_id):
+    """ارزش کوین‌های هر بازیکن (به سانت، با اسلیپیج فروش) → {user_id: سانت}"""
+    out = {}
+    for uid, sym, qty in c.execute("SELECT user_id,coin,qty FROM crypto_wallet WHERE chat_id=? AND qty>0", (chat_id,)).fetchall():
+        out[uid] = out.get(uid, 0) + sell_value(chat_id, sym, qty)
+    return out
+
+def crypto_value_of(chat_id, uid):
+    total = 0
+    for sym, qty in c.execute("SELECT coin,qty FROM crypto_wallet WHERE chat_id=? AND user_id=? AND qty>0", (chat_id, uid)).fetchall():
+        total += sell_value(chat_id, sym, qty)
+    return total
+
+def crypto_buy(chat_id, uid, name, sym, spend):
+    """خرید با spend سانت. خروجی: (True, dict) یا (False, پیام خطا)"""
+    cfg = COINS[sym]
+    size = get_size(chat_id, uid)
+    if spend < CRYPTO_MIN_TRADE:
+        return False, f"❌ حداقل معامله {CRYPTO_MIN_TRADE} سانته."
+    if spend > size:
+        return False, "❌ سانت کافی نداری."
+    max_spend = max(CRYPTO_MIN_TRADE, int(size * CRYPTO_MAX_TRADE_PCT))
+    if spend > max_spend:
+        return False, f"❌ تو هر خرید حداکثر {int(CRYPTO_MAX_TRADE_PCT*100)}٪ سایزت ({max_spend} سانت) رو می‌تونی خرج کنی."
+    cm, q = pool_get(chat_id, sym)
+    fee = max(1, math.ceil(spend * CRYPTO_FEE_PCT))
+    net = spend - fee
+    p0 = cm / q
+    coin_out = q - (cm * q) / (cm + net)
+    pool_set(chat_id, sym, cm + net, q - coin_out)
+    p1 = (cm + net) / (q - coin_out)
+    add_sentiment(chat_id, sym, 0.5 * (p1 / p0 - 1))
+    c.execute("UPDATE users SET size=size-? WHERE chat_id=? AND user_id=?", (spend, chat_id, uid))
+    wallet_add(chat_id, uid, sym, coin_out)
+    distribute_tax(chat_id, uid, fee)
+    news = None
+    if p1 / p0 - 1 >= CRYPTO_NEWS_MOVE_PCT:
+        news = f"🐋 خرید نهنگی! {name} با {spend} سانت {cfg['emoji']} {sym} خرید و قیمت از {fmt_price(p0)} به {fmt_price(p1)} رسید ({(p1/p0-1)*100:+.1f}٪)"
+        add_news(chat_id, news)
+    db.commit()
+    return True, {"coin_out": coin_out, "p0": p0, "p1": p1, "fee": fee, "spend": spend, "news": news}
+
+def crypto_sell(chat_id, uid, name, sym, qty=None):
+    """فروش qty کوین (None = همه). خروجی: (True, dict) یا (False, پیام خطا)"""
+    cfg = COINS[sym]
+    held = wallet_get(chat_id, uid, sym)
+    if held <= 0:
+        return False, f"❌ از {sym} چیزی نداری."
+    if qty is None or qty > held:
+        qty = held
+    if qty <= 0:
+        return False, "❌ مقدار نامعتبره."
+    cm, q = pool_get(chat_id, sym)
+    gross = int(cm - (cm * q) / (q + qty))
+    if gross < CRYPTO_MIN_TRADE:
+        return False, f"❌ این مقدار به {gross} سانت می‌رسه؛ حداقل معامله {CRYPTO_MIN_TRADE} سانته."
+    fee = max(1, math.ceil(gross * CRYPTO_FEE_PCT))
+    net = gross - fee
+    p0 = cm / q
+    pool_set(chat_id, sym, cm - gross, q + qty)
+    p1 = (cm - gross) / (q + qty)
+    add_sentiment(chat_id, sym, 0.5 * (p1 / p0 - 1))
+    wallet_add(chat_id, uid, sym, -qty)
+    c.execute("UPDATE users SET size=size+? WHERE chat_id=? AND user_id=?", (net, chat_id, uid))
+    distribute_tax(chat_id, uid, fee)
+    news = None
+    if p1 / p0 - 1 <= -CRYPTO_NEWS_MOVE_PCT:
+        news = f"📉 فروش سنگین! {name} {fmt_qty(qty)} {cfg['emoji']} {sym} فروخت و قیمت از {fmt_price(p0)} به {fmt_price(p1)} افتاد ({(p1/p0-1)*100:+.1f}٪)"
+        add_news(chat_id, news)
+    db.commit()
+    return True, {"qty": qty, "gross": gross, "net": net, "fee": fee, "p0": p0, "p1": p1, "news": news}
+
+def crypto_inject(chat_id, uid, name, sym, amount):
+    """تزریق سانت به استخر (بدون گرفتن کوین): قیمت بالا می‌ره و سانت برای همیشه تو استخر می‌مونه."""
+    cfg = COINS[sym]
+    size = get_size(chat_id, uid)
+    if amount < CRYPTO_INJECT_MIN:
+        return False, f"❌ حداقل تزریق {CRYPTO_INJECT_MIN} سانته."
+    if amount > size:
+        return False, "❌ سانت کافی نداری."
+    max_amt = max(CRYPTO_INJECT_MIN, int(size * CRYPTO_MAX_TRADE_PCT))
+    if amount > max_amt:
+        return False, f"❌ تو هر تزریق حداکثر {int(CRYPTO_MAX_TRADE_PCT*100)}٪ سایزت ({max_amt} سانت) رو می‌تونی خرج کنی."
+    cm, q = pool_get(chat_id, sym)
+    p0 = cm / q
+    pool_set(chat_id, sym, cm + amount, q)
+    p1 = (cm + amount) / q
+    add_sentiment(chat_id, sym, 0.6 * (p1 / p0 - 1))
+    c.execute("UPDATE users SET size=size-? WHERE chat_id=? AND user_id=?", (amount, chat_id, uid))
+    news = f"💉 تزریق به بازار! {name} {amount} سانت به استخر {cfg['emoji']} {sym} تزریق کرد؛ قیمت از {fmt_price(p0)} به {fmt_price(p1)} رسید ({(p1/p0-1)*100:+.1f}٪)"
+    add_news(chat_id, news)
+    db.commit()
+    return True, {"p0": p0, "p1": p1, "news": news}
+
+# ---------- حزب‌ها ----------
+def party_tag(sym):
+    """برچسب کوتاه حزب برای نمایش کنار اسم شرکت."""
+    cfg = COINS.get(sym)
+    return f" — {cfg['emoji']} {cfg['party']} (پول رسمی: {cfg['name']})" if cfg else " — 🏳️ بدون حزب (/joinparty)"
+
+def party_econ(chat_id):
+    """قدرت اقتصادی هر حزب = جمع ارزش (اسپرم) شرکت‌هایی که ازش حمایت می‌کنن → {sym: ارزش}"""
+    out = {sym: 0 for sym in COINS}
+    for sym, total in c.execute(
+        "SELECT party, COALESCE(SUM(value),0) FROM owned_companies WHERE chat_id=? AND value>0 GROUP BY party", (chat_id,)
+    ).fetchall():
+        if sym in out:
+            out[sym] = total
+    return out
+
+def party_factor(chat_id, sym, econ=None):
+    """ضریب قدرت حزب روی ارزش واقعی کوین: ۱ = حزب متوسط؛ بالاتر = شرکت‌های موفق‌تر از میانگین؛ پایین‌تر = ضعیف‌تر."""
+    if econ is None:
+        econ = party_econ(chat_id)
+    mean = sum(econ.values()) / len(econ)
+    f = ((econ[sym] + PARTY_SMOOTH) / (mean + PARTY_SMOOTH)) ** PARTY_EXPONENT
+    return max(PARTY_FACTOR_MIN, min(PARTY_FACTOR_MAX, f))
+
+def party_company_event(chat_id, sym, company_name, value, joined, kind="cashout"):
+    """حال‌وهوای بازارِ کوینِ یه حزب فوراً تکون می‌خوره و خبرش ثبت می‌شه (قدرت حزب هم خودش از ارزش شرکت‌ها عوض می‌شه).
+    joined=True: شرکت پیوست | joined=False: kind="leave" شرکت رفت، kind="cashout" بخشی از ارزش نقد شد."""
+    crypto_init(chat_id)
+    cfg = COINS[sym]
+    kick = PARTY_NEWS_KICK * value / (value + PARTY_SMOOTH * 2)
+    add_sentiment(chat_id, sym, kick if joined else -kick)
+    if joined:
+        txt = (f"🏛 شرکت «{company_name}» ({value} اسپرم) پشت {cfg['party']} وایستاد؛ "
+               f"قدرت اقتصادی حزب بالا رفت و بازار به {cfg['emoji']} {cfg['name']} خوش‌بین شد")
+    elif kind == "leave":
+        txt = (f"🚪 شرکت «{company_name}» ({value} اسپرم) از {cfg['party']} جدا شد؛ "
+               f"حزب ضعیف‌تر شد و {cfg['emoji']} {cfg['name']} تحت فشار فروش قرار گرفت")
+    else:
+        txt = (f"🏚 «{company_name}» {value} اسپرم از ارزشش رو نقد کرد؛ "
+               f"{cfg['party']} ضعیف‌تر شد و {cfg['emoji']} {cfg['name']} تحت فشار فروش قرار گرفت")
+    add_news(chat_id, txt)
+    db.commit()
+    return txt
+
+def parties_txt():
+    """معرفی حزب‌ها و پول رسمی‌شون."""
+    return "\n".join(f"{cfg['emoji']} {cfg['party']} — پول رسمی: {cfg['name']} ({sym})" for sym, cfg in COINS.items())
+
+def party_join(chat_id, uid, cid, sym):
+    """صاحب شرکت حزب شرکتش رو انتخاب یا عوض می‌کنه. خروجی: (True, پیام) یا (False, پیام خطا)"""
+    row = c.execute(
+        "SELECT owner_id,name,value,party,party_changed FROM owned_companies WHERE id=? AND chat_id=?", (cid, chat_id)
+    ).fetchone()
+    if not row:
+        return False, "❌ همچین شرکتی پیدا نشد."
+    owner_id, name, value, old, changed = row
+    if owner_id != uid:
+        return False, "❌ این شرکت مال تو نیست!"
+    if value <= 0:
+        return False, "❌ ارزش این شرکت صفره؛ هیچ حزبی ازش قدرت نمی‌گیره."
+    if old == sym:
+        return False, f"❌ «{name}» همین الان پشت {COINS[sym]['party']} هست."
+    now = int(time.time())
+    left = (changed or 0) + PARTY_SWITCH_COOLDOWN - now
+    if old in COINS and left > 0:
+        return False, f"⏳ حزب این شرکت رو تازه عوض کردی؛ {left // 3600} ساعت و {(left % 3600) // 60} دقیقه‌ی دیگه می‌تونی دوباره عوضش کنی."
+    c.execute("UPDATE owned_companies SET party=?, party_changed=? WHERE id=?", (sym, now, cid))
+    db.commit()
+    if old in COINS:
+        party_company_event(chat_id, old, name, value, False, kind="leave")
+    party_company_event(chat_id, sym, name, value, True)
+    cfg = COINS[sym]
+    return True, (f"🏛 «{name}» حالا پشت {cfg['party']} وایستاده!\\n"
+                  f"💱 پول رسمی‌ش: {cfg['emoji']} {cfg['name']} ({sym})\\n"
+                  f"💪 ارزش شرکت ({value} اسپرم) به قدرت اقتصادی این حزب اضافه شد.")
+
+# ---------- فروش اجباری برای مالیات ----------
+def liquidate_for_tax(chat_id, uid, need):
+    """برای پرداخت مالیات به اندازه‌ی need سانت از کوین‌های بازیکن (ارزشمندترین اول) می‌فروشه.
+    خروجی: (سانت به‌دست‌اومده، [(sym, qty, سانت)])"""
+    holds = c.execute("SELECT coin,qty FROM crypto_wallet WHERE chat_id=? AND user_id=? AND qty>0", (chat_id, uid)).fetchall()
+    holds.sort(key=lambda r: -sell_value(chat_id, r[0], r[1]))
+    got, sold = 0, []
+    for sym, held in holds:
+        remaining = need - got
+        if remaining <= 0:
+            break
+        cm, q = pool_get(chat_id, sym)
+        gross_all = sell_value(chat_id, sym, held)
+        if gross_all <= 0:
+            continue
+        if gross_all <= remaining:
+            qty_in, gross = held, gross_all
+        else:
+            qty_in = (cm * q) / (cm - remaining) - q
+            qty_in = min(held, qty_in)
+            gross = int(cm - (cm * q) / (q + qty_in))
+            while gross < remaining and qty_in < held:
+                qty_in = min(held, qty_in * 1.001 + 1e-9)
+                gross = int(cm - (cm * q) / (q + qty_in))
+        pool_set(chat_id, sym, cm - gross, q + qty_in)
+        wallet_add(chat_id, uid, sym, -qty_in)
+        got += gross
+        sold.append((sym, qty_in, gross))
+    db.commit()
+    return got, sold
+
+# ===== دستورهای بازار کریپتو =====
+CRYPTO_CD = {}  # (chat_id, user_id) -> آخرین معامله
+
+def parse_coin(arg):
+    arg = (arg or "").strip()
+    sym = COIN_ALIASES.get(arg) or arg.upper()
+    return sym if sym in COINS else None
+
+def coins_txt():
+    return "، ".join(f"{cfg['emoji']} {sym} ({cfg['name']})" for sym, cfg in COINS.items())
+
+def crypto_cd_left(chat_id, uid):
+    return int(CRYPTO_CD.get((chat_id, uid), 0) + CRYPTO_COOLDOWN - time.time())
+
+def crypto_sparkline(prices):
+    blocks = "▁▂▃▄▅▆▇█"
+    lo, hi = min(prices), max(prices)
+    if hi - lo < 1e-9:
+        return blocks[0] * len(prices)
+    return "".join(blocks[int((p - lo) / (hi - lo) * (len(blocks) - 1))] for p in prices)
+
+def crypto_chart_png(sym, rows):
+    """رندر چارت (تابع خالص؛ بدون دسترسی به دیتابیس تا بشه تو ترد جدا اجراش کرد). خروجی: bytes یا None"""
+    try:
+        import io
+        from datetime import datetime
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        xs = [datetime.fromtimestamp(r[0]) for r in rows]
+        ys = [r[1] for r in rows]
+        color = "#2ecc71" if ys[-1] >= ys[0] else "#e74c3c"
+        fig, ax = plt.subplots(figsize=(8, 4), dpi=110)
+        ax.plot(xs, ys, color=color, linewidth=2, drawstyle="steps-post")
+        ax.fill_between(xs, ys, min(ys), color=color, alpha=0.12, step="post")
+        ax.set_title(f"{sym} / cm   last: {ys[-1]:,.2f}")
+        ax.grid(alpha=0.25)
+        fig.autofmt_xdate()
+        fig.tight_layout()
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png")
+        plt.close(fig)
+        return buf.getvalue()
+    except Exception:
+        logger.exception("chart render failed")
+        return None
+
+TRADE_GROUP = {}               # user_id -> (chat_id گروهِ انتخاب‌شده برای معامله، زمان آخرین استفاده)
+TRADE_GROUP_TTL = 6 * 3600     # انتخاب گروه بعد از این مدت بی‌استفاده بودن پاک می‌شه
+
+def user_trade_groups(uid):
+    """گروه‌هایی که این کاربر توشون بازی کرده (چت خصوصی‌ها حساب نمی‌شن)."""
+    return [r[0] for r in c.execute("SELECT DISTINCT chat_id FROM users WHERE user_id=? AND chat_id<0", (uid,)).fetchall()]
+
+async def group_title(bot, chat_id):
+    try:
+        return (await bot.get_chat(chat_id)).title or f"گروه {chat_id}"
+    except Exception:
+        return f"گروه {chat_id}"
+
+async def send_group_picker(m: Message, groups):
+    rows = [[InlineKeyboardButton(text=await group_title(m.bot, g), callback_data=f"tgroup:{g}")] for g in groups[:10]]
+    await m.reply("🏛 معامله‌ات برای کدوم گروه باشه؟", reply_markup=InlineKeyboardMarkup(inline_keyboard=rows))
+
+async def resolve_trade_group(m: Message):
+    """تو پیوی: گروهِ معامله‌ی این کاربر رو پیدا می‌کنه. اگه چندتا گروه داره و هنوز انتخاب نکرده، دکمه‌ی انتخاب می‌فرسته و None برمی‌گردونه."""
+    uid = m.from_user.id
+    now = time.time()
+    sel = TRADE_GROUP.get(uid)
+    if sel and now - sel[1] < TRADE_GROUP_TTL:
+        TRADE_GROUP[uid] = (sel[0], now)
+        return sel[0]
+    groups = user_trade_groups(uid)
+    if not groups:
+        await m.reply("❌ هنوز تو هیچ گروهی بازی نکردی. اول تو گروه /grow بزن، بعد بیا پیوی.")
+        return None
+    if len(groups) == 1:
+        TRADE_GROUP[uid] = (groups[0], now)
+        return groups[0]
+    await send_group_picker(m, groups)
+    return None
+
+async def crypto_precheck(m: Message, group_ok=True):
+    """ساخته شدن استخرها + ثبت کاربر. خروجی: (chat_id گروه، uid) یا None.
+    تو پیوی: گروه از انتخاب کاربر میاد. تو گروه: اگه group_ok=False (دستورهای معامله) کاربر رو می‌فرسته پیوی."""
+    uid = m.from_user.id
+    if m.chat.type == "private":
+        chat_id = await resolve_trade_group(m)
+        if chat_id is None:
+            return None
+    else:
+        chat_id = m.chat.id
+        if not group_ok:
+            user(chat_id, uid, m.from_user.full_name)
+            TRADE_GROUP[uid] = (chat_id, time.time())
+            title = m.chat.title or "این گروه"
+            try:
+                await m.bot.send_message(
+                    uid,
+                    f"🔒 معامله‌ی کریپتو اینجا انجام می‌شه تا کسی نفهمه چی می‌خری و می‌فروشی.\n\n🏛 گروه: «{title}»\n\n"
+                    "🛒 /cbuy [کوین] [سانت]\n💰 /csell [کوین] [مقدار یا all]\n💉 /cinject [کوین] [سانت]\n"
+                    "👛 /cwallet | 🪙 /crypto\n\nمثلاً: /cbuy BTK 100\nگروه دیگه‌ای می‌خوای؟ /tgroup"
+                )
+            except (TelegramForbiddenError, TelegramBadRequest):
+                await m.reply("❌ معامله‌ی کریپتو فقط تو پیوی ربات انجام می‌شه؛ اول ربات رو توی پیوی استارت کن، بعد دوباره اینجا بزن.")
+                return None
+            await m.reply("🔒 معامله‌ی کریپتو فقط تو پیوی ربات انجام می‌شه. 📩 برات پیام خصوصی فرستادم!")
+            return None
+    user(chat_id, uid, m.from_user.full_name)
+    crypto_init(chat_id)
+    return chat_id, uid
+
+@dp.callback_query(F.data.startswith("tgroup:"))
+async def trade_group_pick(q: CallbackQuery):
+    chat_id = int(q.data.split(":")[1])
+    uid = q.from_user.id
+    if chat_id not in user_trade_groups(uid):
+        return await q.answer("❌ تو این گروه بازی نکردی.", show_alert=True)
+    TRADE_GROUP[uid] = (chat_id, time.time())
+    title = await group_title(q.bot, chat_id)
+    await q.message.edit_text(f"✅ گروه معامله: «{title}»\n\nحالا دستورت رو بزن؛ مثلاً /cbuy BTK 100 یا /crypto")
+    await q.answer()
+
+@dp.message(Command("tgroup"))
+async def trade_group_cmd(m: Message):
+    """عوض کردن گروهِ معامله (تو پیوی)."""
+    if m.chat.type != "private":
+        return await m.reply("❌ این دستور رو تو پیوی ربات بزن.")
+    groups = user_trade_groups(m.from_user.id)
+    if not groups:
+        return await m.reply("❌ هنوز تو هیچ گروهی بازی نکردی. اول تو گروه /grow بزن.")
+    TRADE_GROUP.pop(m.from_user.id, None)
+    await send_group_picker(m, groups)
+
+@dp.message(Command("crypto"))
+async def crypto_overview(m: Message):
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, uid = ids
+    lines = []
+    for sym, cfg in COINS.items():
+        cm, q = pool_get(chat_id, sym)
+        ch = change_24h(chat_id, sym)
+        arrow = "🟢▲" if ch >= 0.0005 else ("🔴▼" if ch <= -0.0005 else "⚪️▬")
+        lines.append(
+            f"{cfg['emoji']} {sym} {cfg['name']} — {fmt_price(cm / q)} سانت  {arrow} {ch*100:+.1f}٪\n"
+            f"   💧 نقدینگی {int(cm):,} | 🏛 {cfg['party']} | 💪 {party_econ(chat_id)[sym]} اسپرم"
+        )
+    news = c.execute("SELECT text FROM crypto_news WHERE chat_id=? ORDER BY ts DESC LIMIT 1", (chat_id,)).fetchone()
+    txt = (
+        "🪙 بازار کریپتو (همه‌چی با سانت)\n\n" + "\n".join(lines) +
+        f"\n\n💎 کوین‌های تو: ≈ {crypto_value_of(chat_id, uid)} سانت\n"
+        + (f"📰 آخرین خبر: {news[0]}\n" if news else "")
+        + "\n🔒 معامله فقط تو پیوی ربات:\n🛒 /cbuy [کوین] [سانت] | 💰 /csell [کوین] [مقدار|all]\n"
+        "📈 /cchart [کوین] | 👛 /cwallet | 💉 /cinject [کوین] [سانت]\n"
+        "🏛 /party | 📰 /cnews"
+    )
+    await m.reply(txt)
+
+@dp.message(Command("cbuy"))
+async def crypto_buy_cmd(m: Message):
+    ids = await crypto_precheck(m, group_ok=False)
+    if not ids:
+        return
+    chat_id, uid = ids
+    args = m.text.split()[1:]
+    sym = parse_coin(args[0]) if args else None
+    if not sym or len(args) < 2 or not args[1].isdigit():
+        return await m.reply(f"استفاده: /cbuy [کوین] [مقدار سانت]\nمثلاً: /cbuy BTK 100\nکوین‌ها: {coins_txt()}")
+    left = crypto_cd_left(chat_id, uid)
+    if left > 0:
+        return await m.reply(f"⏳ {left} ثانیه‌ی دیگه می‌تونی معامله کنی.")
+    ok, res = crypto_buy(chat_id, uid, "یه نهنگ ناشناس", sym, int(args[1]))
+    if not ok:
+        return await m.reply(res)
+    CRYPTO_CD[(chat_id, uid)] = time.time()
+    cfg = COINS[sym]
+    await m.reply(
+        f"✅ خرید انجام شد!\n\n"
+        f"{cfg['emoji']} {fmt_qty(res['coin_out'])} {sym} خریدی\n"
+        f"💸 پرداختی: {res['spend']} سانت (کارمزد {res['fee']})\n"
+        f"📈 قیمت: {fmt_price(res['p0'])} → {fmt_price(res['p1'])}\n"
+        f"📏 سایزت: {get_size(chat_id, uid)}"
+    )
+    if res["news"]:
+        await m.bot.send_message(chat_id, res["news"])
+
+@dp.message(Command("csell"))
+async def crypto_sell_cmd(m: Message):
+    ids = await crypto_precheck(m, group_ok=False)
+    if not ids:
+        return
+    chat_id, uid = ids
+    args = m.text.split()[1:]
+    sym = parse_coin(args[0]) if args else None
+    qty = None
+    if sym and len(args) >= 2 and args[1].lower() != "all":
+        try:
+            qty = float(args[1].replace(",", "."))
+        except ValueError:
+            sym = None
+    if not sym or (len(args) < 2):
+        return await m.reply(f"استفاده: /csell [کوین] [مقدار یا all]\nمثلاً: /csell BTK all\nکوین‌ها: {coins_txt()}")
+    left = crypto_cd_left(chat_id, uid)
+    if left > 0:
+        return await m.reply(f"⏳ {left} ثانیه‌ی دیگه می‌تونی معامله کنی.")
+    ok, res = crypto_sell(chat_id, uid, "یه نهنگ ناشناس", sym, qty)
+    if not ok:
+        return await m.reply(res)
+    CRYPTO_CD[(chat_id, uid)] = time.time()
+    cfg = COINS[sym]
+    await m.reply(
+        f"✅ فروش انجام شد!\n\n"
+        f"{cfg['emoji']} {fmt_qty(res['qty'])} {sym} فروختی\n"
+        f"💰 دریافتی: {res['net']} سانت (کارمزد {res['fee']})\n"
+        f"📉 قیمت: {fmt_price(res['p0'])} → {fmt_price(res['p1'])}\n"
+        f"📏 سایزت: {get_size(chat_id, uid)}"
+    )
+    if res["news"]:
+        await m.bot.send_message(chat_id, res["news"])
+
+@dp.message(Command("cinject"))
+async def crypto_inject_cmd(m: Message):
+    ids = await crypto_precheck(m, group_ok=False)
+    if not ids:
+        return
+    chat_id, uid = ids
+    args = m.text.split()[1:]
+    sym = parse_coin(args[0]) if args else None
+    if not sym or len(args) < 2 or not args[1].isdigit():
+        return await m.reply(
+            f"💉 تزریق به بازار\n\nاستفاده: /cinject [کوین] [مقدار سانت]\nمثلاً: /cinject ETK 100\n\n"
+            f"سانتت بدون گرفتن کوین به استخر می‌ره و قیمت بالا می‌ره (برای همه‌ی دارنده‌ها). "
+            f"سانت برنمی‌گرده و تزریق تو اخبار اعلام می‌شه. حداقل {CRYPTO_INJECT_MIN} سانت."
+        )
+    left = crypto_cd_left(chat_id, uid)
+    if left > 0:
+        return await m.reply(f"⏳ {left} ثانیه‌ی دیگه می‌تونی معامله کنی.")
+    ok, res = crypto_inject(chat_id, uid, m.from_user.full_name, sym, int(args[1]))
+    if not ok:
+        return await m.reply(res)
+    CRYPTO_CD[(chat_id, uid)] = time.time()
+    await m.reply(f"💉 تزریق انجام شد! قیمت {sym}: {fmt_price(res['p0'])} → {fmt_price(res['p1'])}\n📏 سایزت: {get_size(chat_id, uid)}")
+    await m.bot.send_message(chat_id, res["news"])
+
+@dp.message(Command("cchart"))
+async def crypto_chart_cmd(m: Message):
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, _uid = ids
+    args = m.text.split()[1:]
+    sym = parse_coin(args[0]) if args else None
+    if not sym:
+        return await m.reply(f"استفاده: /cchart [کوین]\nمثلاً: /cchart BTK\nکوین‌ها: {coins_txt()}")
+    rows = c.execute(
+        "SELECT ts, price FROM crypto_prices WHERE chat_id=? AND coin=? ORDER BY ts DESC LIMIT 150", (chat_id, sym)
+    ).fetchall()[::-1]
+    cfg = COINS[sym]
+    cm, q = pool_get(chat_id, sym)
+    prices = [r[1] for r in rows]
+    ch = change_24h(chat_id, sym)
+    caption = (
+        f"{cfg['emoji']} {sym} {cfg['name']}\n"
+        f"💰 قیمت: {fmt_price(cm / q)} سانت  ({ch*100:+.1f}٪ در ۲۴ ساعت)\n"
+        f"🔺 بیشترین: {fmt_price(max(prices))} | 🔻 کمترین: {fmt_price(min(prices))}\n"
+        f"💧 نقدینگی: {int(cm):,} | 🏛 {cfg['party']}: {party_econ(chat_id)[sym]} اسپرم"
+    )
+    png = await asyncio.to_thread(crypto_chart_png, sym, rows) if len(rows) >= 2 else None
+    if png:
+        return await m.bot.send_photo(m.chat.id, BufferedInputFile(png, filename=f"{sym}.png"), caption=caption)
+    spark = crypto_sparkline(prices[-40:]) if prices else ""
+    await m.reply(caption + (f"\n\n{spark}" if spark else "\n\n(هنوز داده‌ی کافی برای چارت نیست.)"))
+
+@dp.message(Command("cwallet"))
+async def crypto_wallet_cmd(m: Message):
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, uid = ids
+    lines, total = [], 0
+    for sym, cfg in COINS.items():
+        qty = wallet_get(chat_id, uid, sym)
+        if qty > 0:
+            val = sell_value(chat_id, sym, qty)
+            total += val
+            lines.append(f"{cfg['emoji']} {sym}: {fmt_qty(qty)} ≈ {val} سانت")
+    await m.reply(
+        "👛 کیف پول کریپتو\n\n"
+        + ("\n".join(lines) if lines else "کوینی نداری.") +
+        f"\n\n💎 ارزش کل (با اسلیپیج فروش): ≈ {total} سانت"
+        + f"\n\n📏 سایز: {get_size(chat_id, uid)} | ثروت کل (برای مالیات): {net_worth(chat_id, uid)} سانت"
+    )
+
+@dp.message(Command("joinparty"))
+async def joinparty_cmd(m: Message):
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, uid = ids
+    args = m.text.split()[1:]
+    sym = parse_coin(args[1]) if len(args) >= 2 else None
+    if len(args) < 2 or not args[0].isdigit() or not sym:
+        mine = c.execute("SELECT id,name,value,party FROM owned_companies WHERE chat_id=? AND owner_id=?", (chat_id, uid)).fetchall()
+        listing = "\n".join(f"#{cid} {name} ({value} اسپرم){party_tag(p)}" for cid, name, value, p in mine) or "هنوز شرکتی نداری."
+        return await m.reply(
+            "🏛 انتخاب حزب برای شرکتت\n\nاستفاده: /joinparty [شماره شرکت] [کوین]\nمثلاً: /joinparty 5 BTK\n\n"
+            f"حزب‌ها:\n{parties_txt()}\n\n🏢 شرکت‌های تو:\n{listing}\n\n"
+            f"بعد از انتخاب، تا {PARTY_SWITCH_COOLDOWN // 3600} ساعت نمی‌تونی حزب شرکت رو عوض کنی."
+        )
+    ok, msg = party_join(chat_id, uid, int(args[0]), sym)
+    await m.reply(msg)
+    if ok:
+        news = c.execute("SELECT text FROM crypto_news WHERE chat_id=? ORDER BY ts DESC LIMIT 1", (chat_id,)).fetchone()
+        if news:
+            await m.bot.send_message(chat_id, news[0])
+
+@dp.message(Command("party", "parties"))
+async def party_cmd(m: Message):
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, _uid = ids
+    econ = party_econ(chat_id)
+    total = sum(econ.values())
+    rows = c.execute(
+        "SELECT party,name,value,owner_id FROM owned_companies WHERE chat_id=? AND value>0 ORDER BY value DESC", (chat_id,)
+    ).fetchall()
+    blocks = []
+    for sym in sorted(COINS, key=lambda s: -econ[s]):
+        cfg = COINS[sym]
+        share = econ[sym] / total * 100 if total else 0
+        mine = [r for r in rows if r[0] == sym]
+        block = (
+            f"{cfg['emoji']} {cfg['party']} — 💱 پول رسمی: {cfg['name']} ({sym}) = {fmt_price(pool_price(chat_id, sym))} سانت ({change_24h(chat_id, sym)*100:+.1f}٪)\n"
+            f"   🏢 {len(mine)} شرکت | 💪 قدرت اقتصادی {econ[sym]} اسپرم ({share:.0f}٪) | ⚖️ اثر روی ارزش واقعی کوین: ×{party_factor(chat_id, sym, econ):.2f}"
+        )
+        for _p, name, value, owner in mine[:3]:
+            block += f"\n   • {name} — {value} اسپرم (👤 {get_name(chat_id, owner)})"
+        blocks.append(block)
+    free = c.execute("SELECT COUNT(*) FROM owned_companies WHERE chat_id=? AND value>0 AND (party IS NULL OR party='')", (chat_id,)).fetchone()[0]
+    await m.reply(
+        "🏛 حزب‌ها و پول رسمی‌شون\n\n" + "\n\n".join(blocks) +
+        (f"\n\n🏳️ {free} شرکت هنوز حزب انتخاب نکردن و به هیچ کوینی کمک نمی‌کنن." if free else "") +
+        "\n\nصاحب هر شرکت خودش انتخاب می‌کنه پشت کدوم حزب وایسته: /joinparty [شماره شرکت] [کوین] "
+        "(شماره‌ها تو /mycompanies). هرچی شرکت‌های یه حزب با ارزش‌تر باشن، پول رسمی‌ش ارزشمندتر می‌شه."
+    )
+
+@dp.message(Command("cnews"))
+async def crypto_news_cmd(m: Message):
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, _uid = ids
+    rows = c.execute("SELECT ts, text FROM crypto_news WHERE chat_id=? ORDER BY ts DESC LIMIT 8", (chat_id,)).fetchall()
+    if not rows:
+        return await m.reply("📰 هنوز خبری نیست. خبرها از معامله‌های سنگین، تزریق و ورود یا نقد شدن شرکت‌های حزب‌ها ساخته می‌شن.")
+    now = int(time.time())
+    def ago(ts):
+        d = now - ts
+        return f"{d // 3600} ساعت پیش" if d >= 3600 else f"{max(1, d // 60)} دقیقه پیش"
+    await m.reply("📰 اخبار بازار\n\n" + "\n\n".join(f"• {t}\n  ({ago(ts)})" for ts, t in rows))
+
+def crypto_multi_chart_png(series, hours):
+    """چارت یه‌تکه‌ی هر ۳ کوین (پنل جدا برای هرکدوم). series = {sym: [(ts, price), ...]}.
+    تابع خالص (بدون دسترسی به دیتابیس) تا تو ترد جدا اجرا بشه. خروجی: bytes یا None"""
+    try:
+        import io
+        from datetime import datetime
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        syms = [s for s in COINS if len(series.get(s, [])) >= 2]
+        if not syms:
+            return None
+        fig, axes = plt.subplots(len(syms), 1, figsize=(8, 2.6 * len(syms)), dpi=110, sharex=True)
+        fig.patch.set_facecolor("#14161a")
+        if len(syms) == 1:
+            axes = [axes]
+        for ax, sym in zip(axes, syms):
+            rows = series[sym]
+            xs = [datetime.fromtimestamp(r[0]) for r in rows]
+            ys = [r[1] for r in rows]
+            ch = (ys[-1] / ys[0] - 1) * 100 if ys[0] > 0 else 0.0
+            color = "#2ecc71" if ys[-1] >= ys[0] else "#e74c3c"
+            ax.set_facecolor("#1c1f24")
+            ax.plot(xs, ys, color=color, linewidth=2, drawstyle="steps-post")
+            ax.fill_between(xs, ys, min(ys), color=color, alpha=0.12, step="post")
+            ax.set_title(f"{sym}   {ys[-1]:,.2f} cm   ({ch:+.1f}% / {hours}h)", color="white", fontsize=11, loc="left")
+            ax.grid(alpha=0.15)
+            ax.tick_params(colors="#aaaaaa", labelsize=8)
+            for sp in ax.spines.values():
+                sp.set_color("#333842")
+        fig.autofmt_xdate()
+        fig.tight_layout()
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", facecolor=fig.get_facecolor())
+        plt.close(fig)
+        return buf.getvalue()
+    except Exception:
+        logger.exception("multi chart render failed")
+        return None
+
+def crypto_chart_caption(chat_id):
+    lines = []
+    for sym, cfg in COINS.items():
+        cm, q = pool_get(chat_id, sym)
+        ch = change_24h(chat_id, sym)
+        arrow = "🟢▲" if ch >= 0.0005 else ("🔴▼" if ch <= -0.0005 else "⚪️▬")
+        lines.append(f"{cfg['emoji']} {sym}: {fmt_price(cm / q)} سانت {arrow} {ch*100:+.1f}٪ (۲۴ ساعت) | 💪 {party_econ(chat_id)[sym]}")
+    return "📊 آپدیت ۱۰ دقیقه‌ای بازار\n\n" + "\n".join(lines)
+
+async def crypto_market_loop(bot):
+    """هر CRYPTO_SNAPSHOT_INTERVAL ثانیه (۱۰ دقیقه) برای هر گروه:
+    ۱) یه قدم حرکت بازار (ربات‌های بازارساز قیمت رو به‌سمت ارزش واقعی می‌برن؛ اثر قدرت حزب‌ها، سیکل و معامله‌های بازیکنا اینجا اعمال می‌شه)
+    ۲) خبرهای تولیدشده رو تو گروه می‌فرسته
+    ۳) اگه auto_chart روشن باشه، چارت عکسی ۳ کوین رو می‌فرسته"""
+    while True:
+        await asyncio.sleep(CRYPTO_SNAPSHOT_INTERVAL)
+        try:
+            now = int(time.time())
+            chats = [r[0] for r in c.execute("SELECT DISTINCT chat_id FROM crypto_pools").fetchall()]
+            for chat_id in chats:
+                try:
+                    news = market_step(chat_id)
+                    auto = c.execute("SELECT auto_chart FROM crypto_settings WHERE chat_id=?", (chat_id,)).fetchone()
+                    series = {}
+                    for sym in COINS:
+                        series[sym] = c.execute(
+                            "SELECT ts, price FROM crypto_prices WHERE chat_id=? AND coin=? AND ts>=? ORDER BY ts",
+                            (chat_id, sym, now - CRYPTO_CHART_HOURS * 3600)
+                        ).fetchall()
+                    for txt in news:
+                        try:
+                            await bot.send_message(chat_id, txt)
+                        except (TelegramForbiddenError, TelegramBadRequest):
+                            break
+                    if auto is None or auto[0]:
+                        png = await asyncio.to_thread(crypto_multi_chart_png, series, CRYPTO_CHART_HOURS)
+                        if png:
+                            await bot.send_photo(
+                                chat_id, BufferedInputFile(png, filename="market.png"),
+                                caption=crypto_chart_caption(chat_id)
+                            )
+                except (TelegramForbiddenError, TelegramBadRequest):
+                    logger.warning("crypto loop: can't post to chat %s", chat_id)
+                except Exception:
+                    logger.exception("crypto_market_loop chat %s error", chat_id)
+            c.execute("DELETE FROM crypto_prices WHERE ts<?", (now - 3 * 86400,))
+            c.execute("DELETE FROM crypto_news WHERE ts<?", (now - 14 * 86400,))
+            db.commit()
+        except Exception:
+            logger.exception("crypto_market_loop error")
+
+@dp.message(Command("cauto"))
+async def crypto_auto_cmd(m: Message):
+    """روشن/خاموش کردن چارت خودکار ۱۰ دقیقه‌ای (ادمین بازی یا ادمین گروه)."""
+    ids = await crypto_precheck(m)
+    if not ids:
+        return
+    chat_id, uid = ids
+    is_admin = uid in ADMIN_IDS
+    if not is_admin:
+        try:
+            mem = await m.bot.get_chat_member(chat_id, uid)
+            is_admin = mem.status in ("administrator", "creator")
+        except Exception:
+            is_admin = False
+    if not is_admin:
+        return await m.reply("❌ فقط ادمین می‌تونه چارت خودکار رو عوض کنه.")
+    args = m.text.split()[1:]
+    cur = c.execute("SELECT auto_chart FROM crypto_settings WHERE chat_id=?", (chat_id,)).fetchone()
+    cur = cur[0] if cur else 1
+    if not args or args[0].lower() not in ("on", "off"):
+        return await m.reply(f"📊 چارت خودکار الان {'روشنه ✅' if cur else 'خاموشه ⛔️'}\nاستفاده: /cauto on  یا  /cauto off")
+    val = 1 if args[0].lower() == "on" else 0
+    c.execute("UPDATE crypto_settings SET auto_chart=? WHERE chat_id=?", (val, chat_id))
+    db.commit()
+    await m.reply("✅ چارت خودکار روشن شد." if val else "⛔️ چارت خودکار خاموش شد (قیمت‌ها همچنان هر ۱۰ دقیقه آپدیت می‌شن).")
 
 async def main():
     bot=Bot(TOKEN)
@@ -4023,6 +5007,17 @@ async def main():
         BotCommand(command="tocent", description="💰 تبدیل اسپرم به سانت"),
         BotCommand(command="top", description="🏆 جدول بزرگان"),
         BotCommand(command="tax", description="🏛 مالیات پولدارترین فرد و مزرعه"),
+        BotCommand(command="crypto", description="🪙 بازار کریپتو"),
+        BotCommand(command="cbuy", description="🛒 خرید کوین"),
+        BotCommand(command="csell", description="💰 فروش کوین"),
+        BotCommand(command="cchart", description="📈 چارت قیمت کوین"),
+        BotCommand(command="cwallet", description="👛 کیف پول کریپتو"),
+        BotCommand(command="cinject", description="💉 تزریق به بازار"),
+        BotCommand(command="party", description="🏛 حزب‌ها، شرکت‌ها و پول رسمی‌شون"),
+        BotCommand(command="joinparty", description="🏛 انتخاب حزب برای شرکتت"),
+        BotCommand(command="tgroup", description="🔒 انتخاب گروه معامله (تو پیوی)"),
+        BotCommand(command="cnews", description="📰 اخبار بازار کریپتو"),
+        BotCommand(command="cauto", description="📊 روشن/خاموش چارت خودکار ۱۰ دقیقه‌ای (ادمین)"),
         BotCommand(command="token", description="🎟 توکن‌های من و قیمت توکن"),
         BotCommand(command="buytoken", description="🛒 خرید توکن بازی"),
         BotCommand(command="box", description="🎁 مینی‌گیم جعبه‌ی شانس (۱ توکن)"),
@@ -4075,6 +5070,7 @@ async def main():
     asyncio.create_task(company_dividend_loop(bot))
     asyncio.create_task(auction_loop(bot))
     asyncio.create_task(wealth_tax_loop(bot))
+    asyncio.create_task(crypto_market_loop(bot))
     await dp.start_polling(bot)
 
 if __name__=="__main__":

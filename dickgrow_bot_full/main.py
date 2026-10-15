@@ -313,13 +313,13 @@ HELP_SECTIONS = {
     "crypto": (
         "🪙 بازار کریپتو",
         "بازار مشترک هر گروه؛ واحد همه‌چیز سانته. هر کوین «پول رسمی» یه حزبه و هرچی شرکت‌های اون حزب موفق‌تر باشن، کوینش ارزشمندتر می‌شه (مثل دنیای واقعی).\n\n"
-        "🟠 BTK بیتکیر | 🔷 ETK اترکص | 🍈 BGT بیگتیت (پرنوسان)\n\n"
+        "🟠 BTK بیتکیر (نفت) | 🔷 ETK اترکص (برق) | 🍈 BGT بیگتیت (طلا، پرنوسان)\n🥛 WPS WhitePussy_ (لبنیات) | 🦐 PNK PinkPussy_ (میگو) | 🎬 HLY HollyAss (سینما)\n\n"
         "🔒 معامله (خرید، فروش، تزریق) فقط تو پیوی ربات انجام می‌شه تا کسی نفهمه چی می‌خری؛ اگه تو گروه بزنی ربات می‌فرستتت پیوی. اگه تو چند گروه بازی می‌کنی با /tgroup گروه رو انتخاب کن. خبرِ معامله‌های خیلی بزرگ تو گروه میاد ولی اسم نهنگ ناشناسه.\n\n"
         "🛒 /cbuy [کوین] [سانت] — خرید (مثلاً /cbuy BTK 100)\n"
         "💰 /csell [کوین] [مقدار یا all] — فروش\n"
         "📈 /cchart [کوین] — چارت قیمت | 🪙 /crypto — قیمت‌ها | 👛 /cwallet — کیف پول\n"
         "💉 /cinject [کوین] [سانت] — تزریق به بازار: سانتت بدون گرفتن کوین می‌ره تو استخر و قیمت بالا می‌ره (برای همه‌ی دارنده‌ها)؛ تو اخبار اعلام می‌شه\n"
-        "📰 /cnews — اخبار بازار (معامله‌ی سنگین، تزریق، ورود شرکت‌ها به حزب‌ها، فروش اجباری مالیات)\n"
+        "📰 /cnews — اخبار بازار (هر ~۱ ساعت خبر تازه از دنیای شرکت‌های نفت، برق و طلا؛ شایعه، تأیید و تکذیب هم داره. اخبار همون لحظه‌ی انتشار روی قیمت‌ها اثر می‌ذارن ولی نه همیشه به‌شکل ساده!)\n"
         "📊 هر ۱۰ دقیقه بازار یه قدم حرکت می‌کنه و چارت عکسی تو گروه میاد (ادمین با /cauto خاموش/روشنش می‌کنه)\n\n"
         "⚙️ قیمت چطور ساخته می‌شه؟\n"
         "هر کوین یه استخر نقدینگی داره (قیمت = سانتِ استخر ÷ کوینِ استخر). خرید قیمت رو بالا می‌بره و فروش پایین میاره؛ هرچی معامله بزرگ‌تر، اثرش بیشتر (اسلیپیج). کوین‌های کم‌عمق مثل BGT خیلی تکون می‌خورن.\n\n"
@@ -331,6 +331,10 @@ HELP_SECTIONS = {
         f"• حداقل معامله {CRYPTO_MIN_TRADE} سانت؛ هر خرید یا تزریق حداکثر {int(CRYPTO_MAX_TRADE_PCT*100)}٪ سایزت\n"
         f"• بین دو معامله {CRYPTO_COOLDOWN} ثانیه صبر کن\n"
         "• ارزش کوین‌ها (با اسلیپیج فروش) تو ثروتِ مالیات ۵٪ پولدارترین حساب می‌شه؛ اگه سانت و اسپرم کافی نباشه کوین‌هاش اجباری فروخته می‌شن"
+    ),
+    "news": (
+        "📰 اخبار و منابع کوین‌ها",
+        'هر کوین یه منبع درآمد داره و پشتش چند شرکتِ بازیه. اتفاق\u200cهای این شرکت\u200cها تو اخبار میاد و روی قیمت کوین اثر می\u200cذاره.\n\n🟠 BTK بیتکیر ← نفت 🛢\nشرکت\u200cها: پترو\u200cکیر، خلیج\u200cاویل، سیاه\u200cطلا انرژی\nقیمت جهانی نفت، کشف میدان جدید، نشتی و آتش\u200cسوزی، تنش منطقه\u200cای. عمیقه و آروم\u200cتر تکون می\u200cخوره.\n\n🔷 ETK اترکص ← برق ⚡\nشرکت\u200cها: برق\u200cآسا، نیروگاه شمس، توان\u200cگستر\nموج گرما، نیروگاه جدید، خاموشی، گرون شدن سوخت، یارانه\u200cی برق تجدیدپذیر. گرون شدن نفت براش خوب نیست.\n\n🍈 BGT بیگتیت ← طلا و معدن ⛏\nشرکت\u200cها: زرین\u200cکوه، درخشان\u200cزر، معدن کیرآباد\nقیمت جهانی طلا، رگه\u200cی جدید، ریزش معدن، تورم و تنش (به نفعش)، نرخ بهره\u200cی بالا (به ضررش). کم\u200cعمق و خیلی پرنوسانه.\n\n🥛 WPS WhitePussy_ ← لبنیات و دامپروری\nشرکت\u200cها: شیرآوران، گاوداری دشت سبز، لبنیات سپیدچشمه\nصادرات، فراخوان محصول، خشکسالی و گرونی علوفه، گرمای شدید (به ضررش). تو رکود کمتر از بقیه می\u200cخوره. آروم و دفاعیه.\n\n🦐 PNK PinkPussy_ ← شیلات و میگو\nشرکت\u200cها: میگوی خلیج\u200cنوین، صید دریاپارس، شیلات مروارید\nتعرفه\u200cی صادراتی، بیماری میگو، گواهی استاندارد، تنش دریایی، رکود (به ضررش). حساس و پرنوسانه.\n\n🎬 HLY HollyAss ← سینما و سرگرمی\nشرکت\u200cها: استودیو کیان\u200cفیلم، سینما\u200cگستر، پخش ستاره\u200cی شب\nفیلم پرفروش، شکست گیشه، قرارداد پخش بین\u200cالمللی، رونق (به نفعش)، رکود و افت تقاضا (به ضررش). عمیقه ولی به اقتصاد حساسه.\n\n⏰ خبرها کی میان؟\nتقریباً هر ساعت یه خبر (گاهی دو تا، گاهی هیچ، شب\u200cها ساکته). فقط ۵ خبر آخر رو با /cnews می\u200cبینی. نوعش هم فرق می\u200cکنه: اتفاق شرکتی، قیمت جهانی، اخبار کلی اقتصاد (نرخ بهره، تورم، تنش، رکود و رونق که روی همه\u200cی کوین\u200cها اثر می\u200cذاره ولی هر کدوم یه جور)، و خبرهای عادی و دوپهلو که شاید اثری نداشته باشن.\n\n⏳ فرصت پوزیشن گرفتن\nوقتی خبر میاد قیمت همون لحظه عوض نمی\u200cشه؛ حدود ۱۰ دقیقه بعد اثرش یهویی میاد. تو این فاصله می\u200cتونی بخری یا بفروشی، ولی همیشه اون\u200cطوری که فکر می\u200cکنی نمی\u200cشه!\n\n👔 مدیرعامل\u200cها\nهر شرکت یه مدیرعامل داره. استعفاش معمولاً کوین رو تحت فشار می\u200cذاره و چند ساعت بعد جانشینش معرفی می\u200cشه (اثر مثبت کوچیک).\n\n🕵️ شایعه\u200cها\nبعضی خبرها شایعه\u200cان («منابع ناشناس می\u200cگن...»). چند ساعت بعد یا تأیید می\u200cشن ✅ و اثر اصلی میاد، یا تکذیب می\u200cشن ❌ و اثر شایعه برمی\u200cگرده.\n\n🧠 چرا نمی\u200cشه همیشه حدس زد؟\n• بعضی وقتا بازار «خبر رو می\u200cفروشه» و کوتاه\u200cمدت برعکس می\u200cشه\n• اندازه\u200cی اثر هر خبر رندومه\n• کوینی که خیلی بالا رفته، خبر بدش محتمل\u200cتره و برعکس\n• خبر یه کوین کمی روی بقیه هم اثر می\u200cذاره (مثلاً گرون شدن نفت برای برق بده)\n\n📌 /cnews ← ۵ خبر آخر | /crypto ← قیمت\u200cها | /cchart [کوین] ← چارت | /cbuy و /csell ← خرید و فروش (تو پیوی)'
     ),
     "pvp": (
         "⚔️ دوئل و رنک",
@@ -406,6 +410,7 @@ def help_main_kb():
         [InlineKeyboardButton(text="🎮 مینی‌گیم‌ها", callback_data="help:games")],
         [InlineKeyboardButton(text="🃏 بلک‌جک", callback_data="help:blackjack")],
         [InlineKeyboardButton(text="🪙 کریپتو", callback_data="help:crypto")],
+        [InlineKeyboardButton(text="📰 اخبار و منابع کوین‌ها", callback_data="help:news")],
         [InlineKeyboardButton(text="⚔️ دوئل و رنک", callback_data="help:pvp")],
         [InlineKeyboardButton(text="🔫 مافیا", callback_data="help:mafia")],
         [InlineKeyboardButton(text="🌟 سلبریتی‌ها", callback_data="help:celeb")],
@@ -2767,7 +2772,7 @@ async def reset_group(m: Message):
         "company_rounds", "company_options", "company_investments",
         "company_participants", "owned_companies",
         "farm_tiles", "farm_inventory", "farm_records", "auctions", "climb_games", "blackjack_games", "wealth_tax", "activity", "play_log",
-        "crypto_pools", "crypto_wallet", "crypto_prices", "crypto_npc", "crypto_settings", "crypto_news",
+        "crypto_pools", "crypto_wallet", "crypto_prices", "crypto_npc", "crypto_settings", "crypto_news", "crypto_fund", "crypto_effects", "crypto_ceo",
     ):
         c.execute(f"DELETE FROM {table} WHERE chat_id=?", (chat_id,))
     # جدول‌هایی که فقط از طریق battle_id به گروه وصلن
@@ -4113,8 +4118,11 @@ COINS = {
     "BTK": {"emoji": "🟠", "name": "بیتکیر", "party": "حزب بیتکیر", "price": 200.0, "depth": 40000.0, "cycle": (0.10, 9.0, 0.04, 2.7)},
     "ETK": {"emoji": "🔷", "name": "اترکص",  "party": "حزب اترکص",  "price": 50.0,  "depth": 10000.0, "cycle": (0.18, 6.0, 0.07, 1.9)},
     "BGT": {"emoji": "🍈", "name": "بیگتیت", "party": "حزب بیگتیت", "price": 5.0,   "depth": 2000.0,  "cycle": (0.30, 4.0, 0.12, 1.3)},
+    "WPS": {"emoji": "🥛", "name": "WhitePussy_", "party": "حزب WhitePussy_", "price": 30.0, "depth": 8000.0,  "cycle": (0.08, 8.0, 0.03, 3.1)},
+    "PNK": {"emoji": "🦐", "name": "PinkPussy_",  "party": "حزب PinkPussy_",  "price": 12.0, "depth": 4000.0,  "cycle": (0.20, 5.0, 0.08, 2.2)},
+    "HLY": {"emoji": "🎬", "name": "HollyAss",    "party": "حزب HollyAss",    "price": 80.0, "depth": 15000.0, "cycle": (0.14, 7.0, 0.05, 2.4)},
 }
-COIN_ALIASES = {"بیتکیر": "BTK", "اترکص": "ETK", "بیگتیت": "BGT"}   # اسم فارسی هم تو دستورها قبول می‌شه
+COIN_ALIASES = {"بیتکیر": "BTK", "اترکص": "ETK", "بیگتیت": "BGT", "whitepussy_": "WPS", "whitepussy": "WPS", "pinkpussy_": "PNK", "pinkpussy": "PNK", "hollyass": "HLY"}   # اسم فارسی هم تو دستورها قبول می‌شه
 OLD_COIN_NAMES = {"USD": "BTK", "SPM": "ETK", "MOON": "BGT"}      # برای مهاجرت دیتابیس قدیمی
 PARTY_SMOOTH = 50          # هرچی بیشتر، قدرت حزب‌ها تو شروع بازی کمتر از هم فاصله می‌گیره
 PARTY_EXPONENT = 0.6       # شدت اثر قدرت حزب روی ارزش واقعی کوین (۰ = بی‌اثر)
@@ -4181,6 +4189,7 @@ def crypto_init(chat_id):
             (chat_id, sym, cm * CRYPTO_NPC_FRACTION, q * CRYPTO_NPC_FRACTION, cm / q, now)
         )
     c.execute("INSERT OR IGNORE INTO crypto_settings(chat_id,auto_chart) VALUES(?,1)", (chat_id,))
+    ensure_min_depth(chat_id)
     db.commit()
 
 def pool_get(chat_id, sym):
@@ -4211,7 +4220,7 @@ def cycle_factor(chat_id, sym, t):
 def fair_value(chat_id, sym, t, sentiment=0.0):
     """ارزش واقعی کوین (سانت) = قیمت پایه × سیکل × حال‌وهوا × قدرت حزب (هرچی شرکت‌های حزب موفق‌تر، ارزش بیشتر)."""
     cfg = COINS[sym]
-    return cfg["price"] * cycle_factor(chat_id, sym, t) * (1 + sentiment) * party_factor(chat_id, sym)
+    return cfg["price"] * cycle_factor(chat_id, sym, t) * (1 + sentiment) * party_factor(chat_id, sym) * fund_get(chat_id, sym)
 
 def market_step(chat_id):
     """یه قدم حرکت بازار (هر ۱۰ دقیقه): ربات‌های بازارساز قیمت رو به‌سمت ارزش واقعی می‌برن.
@@ -4220,6 +4229,9 @@ def market_step(chat_id):
     خروجی: لیست خبرهای این قدم."""
     now = int(time.time())
     news = []
+    news += news_apply_due(chat_id, now)          # مراحل بعدی خبرها / تأیید و تکذیب شایعه‌ها
+    fund_decay(chat_id, CRYPTO_SNAPSHOT_INTERVAL)  # شوک‌های قدیمی خبری محو می‌شن
+    liquidity_step(chat_id)                        # عمق استخر با حجم معاملات بیشتر می‌شه
     for sym, cfg in COINS.items():
         pool = pool_get(chat_id, sym)
         npc = c.execute(
@@ -4340,7 +4352,8 @@ def crypto_buy(chat_id, uid, name, sym, spend):
     coin_out = q - (cm * q) / (cm + net)
     pool_set(chat_id, sym, cm + net, q - coin_out)
     p1 = (cm + net) / (q - coin_out)
-    add_sentiment(chat_id, sym, 0.5 * (p1 / p0 - 1))
+    add_sentiment(chat_id, sym, trade_sentiment(p0, p1, 0.5))
+    add_volume(chat_id, sym, spend)
     c.execute("UPDATE users SET size=size-? WHERE chat_id=? AND user_id=?", (spend, chat_id, uid))
     wallet_add(chat_id, uid, sym, coin_out)
     distribute_tax(chat_id, uid, fee)
@@ -4370,7 +4383,8 @@ def crypto_sell(chat_id, uid, name, sym, qty=None):
     p0 = cm / q
     pool_set(chat_id, sym, cm - gross, q + qty)
     p1 = (cm - gross) / (q + qty)
-    add_sentiment(chat_id, sym, 0.5 * (p1 / p0 - 1))
+    add_sentiment(chat_id, sym, trade_sentiment(p0, p1, 0.5))
+    add_volume(chat_id, sym, gross)
     wallet_add(chat_id, uid, sym, -qty)
     c.execute("UPDATE users SET size=size+? WHERE chat_id=? AND user_id=?", (net, chat_id, uid))
     distribute_tax(chat_id, uid, fee)
@@ -4396,12 +4410,586 @@ def crypto_inject(chat_id, uid, name, sym, amount):
     p0 = cm / q
     pool_set(chat_id, sym, cm + amount, q)
     p1 = (cm + amount) / q
-    add_sentiment(chat_id, sym, 0.6 * (p1 / p0 - 1))
+    add_sentiment(chat_id, sym, trade_sentiment(p0, p1, 0.6))
+    add_volume(chat_id, sym, amount)
     c.execute("UPDATE users SET size=size-? WHERE chat_id=? AND user_id=?", (amount, chat_id, uid))
     news = f"💉 تزریق به بازار! {name} {amount} سانت به استخر {cfg['emoji']} {sym} تزریق کرد؛ قیمت از {fmt_price(p0)} به {fmt_price(p1)} رسید ({(p1/p0-1)*100:+.1f}٪)"
     add_news(chat_id, news)
     db.commit()
     return True, {"p0": p0, "p1": p1, "news": news}
+
+
+# ===== اخبار پویا 📰 + ضد‌نهنگ 🐋 =====
+# ایده: هر کوین یه «منبع درآمد» (نفت، برق، طلا) و شرکت‌های ثابت خودش رو داره. هر ~۱ ساعت یه خبر از ترکیب «قالب جمله × اسلات‌ها» ساخته می‌شه.
+# خبر مستقیم قیمت رو دست نمی‌زنه؛ دو چیز رو عوض می‌کنه و ربات‌های بازارساز خودشون قیمت رو دنبال می‌کنن:
+#   ۱) «بنیاد» (fund): ضریب بلندمدت ارزش واقعی (به‌آرومی به ۱ برمی‌گرده)   ۲) «حال‌وهوا» (sentiment): کوتاه‌مدت و زود محو می‌شه
+# برای اینکه بازیکنا نتونن خبر رو حدس بزنن:
+#   • خبر اول منتشر می‌شه، ~۱۰ دقیقه بعد (رندوم) اثرش یهویی روی قیمت میاد؛ تو این فاصله بازیکنا می‌تونن پوزیشن ببندن  • اندازه‌ی اثر رندومه  • ~۱۲٪ مواقع بازار «خبر رو می‌فروشه» (واکنش کوتاه‌مدت برعکس)
+#   • شایعه‌هایی هست که بعداً تأیید یا تکذیب می‌شن  • خبرهای خنثی و مبهم هم هست  • اخبار کلان بازار روی همه‌ی کوین‌ها با ضریب متفاوت اثر می‌ذاره
+#   • اگه بنیاد یه کوین زیادی بالا رفته باشه، خبر بد محتمل‌تره (و برعکس) → قیمت‌ها یه پایه‌ی منطقی دارن و فقط یک‌طرفه نمی‌رن
+NEWS_INTERVAL = 3600            # هر ~۱ ساعت (با ±۱۵٪ جابه‌جایی رندوم تا ساعت‌به‌ساعت قابل‌پیش‌بینی نباشه)
+NEWS_SKIP_PROB = 0.15           # احتمال اینکه یه ساعت خبری نباشه
+NEWS_DOUBLE_PROB = 0.20         # احتمال دو خبر تو یه ساعت
+NEWS_QUIET_HOURS = (1, 8)       # ساعت سکوت (به وقت NEWS_TZ_OFFSET)
+NEWS_TZ_OFFSET = int(3.5 * 3600)
+NEWS_MACRO_PROB = 0.12          # احتمال خبر کلان بازار
+NEWS_RUMOR_PROB = 0.15          # احتمال اینکه خبر به‌شکل شایعه بیاد
+RUMOR_TRUE_PROB = 0.55
+NEWS_SURPRISE_PROB = 0.12       # «فروش خبر»: واکنش کوتاه‌مدت برعکس
+NEWS_RECENT_MEMORY = 14         # چند قالب اخیر دوباره تکرار نشن
+FUND_MIN, FUND_MAX = 0.55, 1.80
+FUND_HALFLIFE = 36 * 3600       # نیمه‌عمر بنیاد (برگشت به ۱)
+# --- ضد نهنگ (بدون هیچ محدودیت یا کارمزد اضافه؛ فقط استخرها عمیق‌ترن) ---
+DEPTH_MULT = 10                 # ضریب عمق استخرها نسبت به قبل (۱۰ = معامله‌ی ۲۰۰۰ سانتی تقریباً ≈ ۱٪ اثر روی BTK)
+CRYPTO_SENT_TRADE_CAP = 0.04    # سقف اثر هر معامله روی حال‌وهوا
+LIQ_VOL_RATE = 0.15             # چند درصد حجم معاملات ۱۰ دقیقه‌ی اخیر به عمق استخر اضافه می‌شه (نقدینگی جذب نقدینگی می‌کنه)
+LIQ_BASE_RATE = 0.002           # رشد پایه‌ی عمق در هر قدم (۱۰ دقیقه)
+LIQ_MAX_MULT = 25               # سقف عمق نسبت به عمق اولیه
+
+for _cfg in COINS.values():
+    _cfg["depth"] = _cfg["depth"] * DEPTH_MULT
+
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_fund(
+    chat_id INTEGER, coin TEXT, fund REAL DEFAULT 1.0, vol REAL DEFAULT 0, last_news INTEGER DEFAULT 0,
+    PRIMARY KEY(chat_id, coin))""")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_effects(
+    id INTEGER PRIMARY KEY AUTOINCREMENT, chat_id INTEGER, coin TEXT, apply_ts INTEGER,
+    d_fund REAL DEFAULT 0, d_sent REAL DEFAULT 0, text TEXT, done INTEGER DEFAULT 0, kick REAL DEFAULT 0)""")
+try:
+    c.execute("ALTER TABLE crypto_effects ADD COLUMN kick REAL DEFAULT 0")
+except sqlite3.OperationalError:
+    pass
+c.execute("CREATE INDEX IF NOT EXISTS idx_crypto_effects ON crypto_effects(done, apply_ts)")
+c.execute("""CREATE TABLE IF NOT EXISTS crypto_ceo(
+    chat_id INTEGER, company TEXT, name TEXT, PRIMARY KEY(chat_id, company))""")
+db.commit()
+
+# ---------- دنیای هر کوین ----------
+FIRST_NAMES = ["علی", "رضا", "کاوه", "مهران", "نیما", "سیامک", "بهنام", "فرهاد", "آرش", "شهرام", "پارسا", "کیان", "امیر", "بابک",
+               "سارا", "نگار", "مینا", "شیدا", "ترانه", "یاسمن", "لیلا", "آزاده", "مریم", "هستی"]
+LAST_NAMES = ["کریمی", "صادقی", "نیک‌نام", "رحیمی", "حسام‌زاده", "فلاحی", "مرادی", "آذرنیا", "کیانی", "بهشتی", "طاهری", "سلحشور",
+              "جهانگیری", "شریفی", "امیدوار", "قنبری", "یگانه", "توکلی"]
+FIRMS = ["کارگزاری سپهر", "تحلیل‌گران آریا", "مؤسسه‌ی پیشگام", "بانک سرمایه‌ی افق", "گروه مشاوره‌ی ستاره", "پژوهش‌کده‌ی مهرگان"]
+ORGS_GENERIC = ["سازمان نظارت بر بازار", "وزارت اقتصاد", "کمیسیون تنظیم مقررات", "سازمان استاندارد"]
+REASONS_RESIGN = ["دلیل رسمی «مسائل شخصی» اعلام شده", "هنوز جانشینی معرفی نشده",
+                  "منابع نزدیک به شرکت از اختلاف با سهام‌داران عمده حرف می‌زنن",
+                  "هیئت‌مدیره می‌گه انتقال مدیریت بدون مشکل انجام می‌شه",
+                  "تحلیلگرا نگران ثبات استراتژی شرکت هستن", "این سومین تغییر مدیریتی شرکت تو دو سال اخیره"]
+APPOINT_NOTES = ["سابقه‌ی چند ساله تو صنعت داره", "بازار هنوز منتظر دیدن برنامه‌هاش می‌مونه",
+                 "قول داده هزینه‌ها رو کم کنه", "تحلیلگرا انتخابش رو «محافظه‌کارانه» می‌دونن"]
+PARTNERS = ["یه کنسرسیوم منطقه‌ای", "گروه صنعتی البرز‌نو", "یه شرکت خارجی", "شبکه‌ی توزیع شمال", "یه صندوق سرمایه‌گذاری بزرگ", "بخش خصوصی غرب کشور"]
+STRIKE_REASONS = ["تأخیر تو پرداخت حقوق", "شرایط ایمنی محل کار", "اختلاف روی پاداش سالانه", "اضافه‌کاری اجباری"]
+CYBER_NOTES = ["شرکت می‌گه اطلاعات مهمی لو نرفته", "هنوز میزان خسارت مشخص نیست", "سامانه‌ها چند ساعت از دسترس خارج بودن"]
+
+SECTORS = {
+    "BTK": {
+        "label": "نفت", "emoji": "🛢", "item": "نفت خام", "unit": "هزار بشکه در روز", "num": (80, 900),
+        "companies": ["پترو‌کیر", "خلیج‌اویل", "سیاه‌طلا انرژی"],
+        "assets": ["میدان نفتی غرب", "پالایشگاه جنوب", "سکوی دریایی ۴", "خط لوله‌ی شمال"],
+        "orgs": ["وزارت نفت", "اتحادیه‌ی تولیدکنندگان نفت"] + ORGS_GENERIC[:2],
+        "issues": ["نشتی خط لوله", "تعمیرات برنامه‌ریزی‌نشده", "کمبود قطعات حفاری"],
+        "price_up": ["قیمت جهانی نفت امروز بالا رفت؛ نگرانی از کاهش عرضه دلیلش بود",
+                     "نفت خام بعد از گزارش افت ذخایر آمریکا گرون شد"],
+        "price_down": ["قیمت جهانی نفت افت کرد؛ تقاضای ضعیف آسیا دلیلش بود",
+                       "نفت خام بعد از افزایش تولید اعضای اتحادیه ارزون شد"],
+        "accidents": ["نشتی نفت تو {asset} {co}؛ تولید موقتاً متوقف شد", "آتش‌سوزی تو {asset} {co}؛ علت هنوز مشخص نیست",
+                      "تانکر حامل محموله‌ی {co} تو مسیر صادرات گرفتار شد و تأخیر پیش اومد"],
+        "techs": ["{co} روش جدید حفاری کم‌هزینه رو تو {asset} با موفقیت آزمایش کرد",
+                  "{co} از افزایش بازدهی استخراج با فناوری جدید خبر داد"],
+        "special": [
+            ("کشف میدان", +1, (0.06, 0.12), (0.04, 0.08), ["{co} از کشف یه میدان نفتی جدید نزدیک {asset} خبر داد؛ ذخیره‌ی تخمینی {num} میلیون بشکه"]),
+            ("کاهش سقف تولید", +1, (0.04, 0.09), (0.03, 0.06), ["اتحادیه‌ی تولیدکنندگان نفت سقف تولید رو کاهش داد؛ عرضه‌ی جهانی محدودتر می‌شه"]),
+            ("محاصره‌ی مسیر", -1, (0.03, 0.08), (0.03, 0.06), ["مسیر دریایی صادرات {co} به‌خاطر تنش منطقه‌ای چند روز بسته شد"]),
+        ],
+    },
+    "ETK": {
+        "label": "برق", "emoji": "⚡", "item": "برق", "unit": "مگاوات", "num": (200, 4000),
+        "companies": ["برق‌آسا", "نیروگاه شمس", "توان‌گستر"],
+        "assets": ["نیروگاه سیکل‌ترکیبی", "نیروگاه خورشیدی کویر", "پست انتقال مرکزی", "نیروگاه آبی شمال"],
+        "orgs": ["شرکت مدیریت شبکه‌ی برق", "وزارت نیرو"] + ORGS_GENERIC[:2],
+        "issues": ["خرابی توربین", "کم‌آبی سد", "کمبود گاز تحویلی"],
+        "price_up": ["تقاضای برق با موج گرما رکورد زد و قیمت تو بازار برق بالا رفت",
+                     "قیمت برق تو بورس انرژی بعد از افزایش مصرف صنعتی رشد کرد"],
+        "price_down": ["مصرف برق با هوای ملایم افت کرد و قیمت‌ها پایین اومد",
+                       "عرضه‌ی زیاد برق تجدیدپذیر قیمت تو بازار رو پایین کشید"],
+        "accidents": ["خاموشی گسترده تو منطقه‌ی تحت پوشش {co}؛ شبکه ساعتی از مدار خارج بود",
+                      "حریق تو {asset} {co}؛ بخشی از ظرفیت از مدار خارج شد",
+                      "اضافه‌بار شبکه باعث قطعی تو {asset} {co} شد"],
+        "techs": ["{co} باتری ذخیره‌ساز جدید رو تو {asset} راه‌اندازی کرد", "{co} با سامانه‌ی هوشمند، تلفات شبکه رو کم کرد"],
+        "special": [
+            ("نیروگاه جدید", +1, (0.05, 0.10), (0.03, 0.07), ["{asset} جدید {co} با ظرفیت {num} مگاوات به شبکه متصل شد"]),
+            ("یارانه‌ی تجدیدپذیر", +1, (0.04, 0.08), (0.03, 0.06), ["دولت برای برق خورشیدی و بادی یارانه‌ی جدید تصویب کرد"]),
+            ("گرون شدن سوخت", -1, (0.03, 0.07), (0.03, 0.05), ["قیمت سوخت نیروگاه‌ها بالا رفت؛ حاشیه‌ی سود شرکت‌های برق تحت فشاره"]),
+        ],
+    },
+    "BGT": {
+        "label": "طلا و معدن", "emoji": "⛏", "item": "شمش طلا", "unit": "کیلوگرم شمش", "num": (50, 700),
+        "companies": ["زرین‌کوه", "درخشان‌زر", "معدن کیرآباد"],
+        "assets": ["معدن شماره ۲", "کارخانه‌ی فرآوری", "بخش عمیق معدن", "خط ذوب"],
+        "orgs": ["سازمان معادن", "اتحادیه‌ی طلا و جواهر"] + ORGS_GENERIC[:2],
+        "issues": ["ریزش بخشی از تونل", "افت عیار سنگ", "خرابی دستگاه‌های خردایش"],
+        "price_up": ["قیمت جهانی طلا بالا رفت؛ سرمایه‌گذارا دنبال پناهگاه امن هستن",
+                     "طلا بعد از ضعیف شدن دلار گرون شد"],
+        "price_down": ["قیمت جهانی طلا افت کرد؛ سرمایه‌گذارا دارن سود برمی‌دارن",
+                       "طلا با قوی شدن دلار ارزون شد"],
+        "accidents": ["ریزش تو {asset} {co}؛ فعالیت معدن موقتاً متوقف شد", "نشت مواد شیمیایی تو {asset} {co}؛ بازرسی تا اطلاع بعدی ادامه داره",
+                      "قطع برق تو {asset} {co} تولید یه روز رو مختل کرد"],
+        "techs": ["{co} روش جدید فرآوری رو آزمایش کرد که بازیافت طلا رو بالا می‌بره", "{co} حفاری خودکار رو تو {asset} راه‌اندازی کرد"],
+        "special": [
+            ("رگه‌ی جدید", +1, (0.06, 0.12), (0.04, 0.08), ["{co} تو {asset} به یه رگه‌ی غنی طلا رسید؛ عیار {num} گرم در تن گزارش شده"]),
+            ("تقاضای جواهر", +1, (0.03, 0.07), (0.03, 0.05), ["تقاضای جواهر تو فصل عروسی بالا رفت و فروش شمش رونق گرفت"]),
+            ("برخورد با قاچاق", -1, (0.02, 0.06), (0.02, 0.05), ["{org} تشدید کنترل‌ها و بازرسی‌های معادن رو اعلام کرد؛ هزینه‌ی انطباق بالا می‌ره"]),
+        ],
+    },
+    "WPS": {
+        "label": "لبنیات و دامپروری", "emoji": "🥛", "item": "شیر خام", "unit": "تن شیر در روز", "num": (50, 600),
+        "companies": ["شیرآوران", "گاوداری دشت سبز", "لبنیات سپیدچشمه"],
+        "assets": ["گاوداری مرکزی", "کارخانه‌ی پاستوریزه", "مرکز پخش لبنیات", "مزرعه‌ی علوفه"],
+        "orgs": ["سازمان دامپزشکی", "وزارت جهاد کشاورزی"] + ORGS_GENERIC[:2],
+        "issues": ["شیوع بیماری دام", "کمبود علوفه", "خرابی دستگاه پاستوریزه"],
+        "price_up": ["قیمت جهانی شیر خشک بالا رفت؛ صادرات لبنیات جذاب‌تر شد",
+                     "تقاضای ماست و بستنی تو فصل گرما رشد کرد و فروش لبنیات بالا رفت"],
+        "price_down": ["قیمت جهانی شیر خشک افت کرد؛ رقابت واردات بیشتر شد",
+                       "مازاد تولید شیر قیمت‌ها رو پایین کشید"],
+        "accidents": ["شیوع بیماری تو {asset} {co}؛ بخشی از دام‌ها قرنطینه شدن",
+                      "خرابی سردخانه تو {asset} {co}؛ بخشی از محصول فاسد شد",
+                      "فراخوان محصول: {co} یه سری لبنیات رو به‌خاطر ایراد کیفی جمع کرد"],
+        "techs": ["{co} شیردوشی رباتیک رو تو {asset} راه‌اندازی کرد", "{co} روش جدید افزایش ماندگاری محصول رو آزمایش کرد"],
+        "special": [
+            ("بازار صادراتی", +1, (0.04, 0.09), (0.03, 0.06), ["{co} قرارداد صادرات به یه بازار جدید بست؛ سفارش اولیه {num} تن"]),
+            ("خشکسالی", -1, (0.03, 0.07), (0.03, 0.05), ["خشکسالی قیمت علوفه رو بالا برد؛ هزینه‌ی دامداری‌ها زیاد شد"]),
+            ("خط ارگانیک", +1, (0.02, 0.06), (0.02, 0.05), ["{co} خط تولید ارگانیک جدیدش رو معرفی کرد و با استقبال روبه‌رو شد"]),
+        ],
+        "macro": {"rate_up": 0.3, "rate_down": 0.3, "inflation": -0.5, "tension": 0, "heatwave": -0.7, "demand_drop": 0.4, "boom": 0.4, "recession": 0.2},
+    },
+    "PNK": {
+        "label": "شیلات و میگو", "emoji": "🦐", "item": "میگوی صادراتی", "unit": "تن میگو", "num": (20, 400),
+        "companies": ["میگوی خلیج‌نوین", "صید دریاپارس", "شیلات مروارید"],
+        "assets": ["مزرعه‌ی پرورش میگو", "ناوگان صیادی", "کارخانه‌ی فرآوری", "اسکله‌ی صادراتی"],
+        "orgs": ["سازمان شیلات", "گمرک"] + ORGS_GENERIC[:2],
+        "issues": ["بیماری لکه‌ی سفید میگو", "گرمای بیش از حد آب", "خرابی سیستم هوادهی"],
+        "price_up": ["قیمت جهانی میگو بالا رفت؛ تقاضای اروپا زیاد شده",
+                     "تقاضای صادراتی میگو رکورد زد"],
+        "price_down": ["قیمت میگو تو بازارهای صادراتی افت کرد؛ عرضه‌ی رقبا زیاد شده",
+                       "مازاد عرضه‌ی میگو قیمت‌ها رو پایین آورد"],
+        "accidents": ["شیوع بیماری تو {asset} {co}؛ بخشی از محصول معدوم شد",
+                      "مرگ‌ومیر ناگهانی میگو تو {asset} {co}؛ علت تو دست بررسیه",
+                      "خرابی سردخانه‌ی {asset} {co} محموله‌ی صادراتی رو به خطر انداخت"],
+        "techs": ["{co} سامانه‌ی هوشمند کنترل کیفیت آب رو تو {asset} نصب کرد", "{co} نژاد مقاوم‌تر میگو رو با موفقیت پرورش داد"],
+        "special": [
+            ("تعرفه‌ی جدید", -1, (0.03, 0.07), (0.03, 0.05), ["یه بازار خارجی تعرفه‌ی واردات آبزیان رو بالا برد؛ صادرکننده‌ها نگران شدن"]),
+            ("استاندارد صادراتی", +1, (0.04, 0.08), (0.03, 0.06), ["{co} گواهی استاندارد بین‌المللی گرفت و مجوز صادرات به یه بازار جدید رو به دست آورد"]),
+            ("تنش دریایی", -1, (0.02, 0.06), (0.02, 0.05), ["تنش تو مسیر دریایی ارسال محموله‌های {co} رو چند روز عقب انداخت"]),
+        ],
+        "macro": {"rate_up": 0.5, "rate_down": 0.5, "inflation": -0.3, "tension": -0.3, "heatwave": -0.5, "demand_drop": 0.7, "boom": 0.7, "recession": 0.7},
+    },
+    "HLY": {
+        "label": "سینما و سرگرمی", "emoji": "🎬", "item": "حق پخش فیلم", "unit": "فیلم در سال", "num": (4, 40),
+        "companies": ["استودیو کیان‌فیلم", "سینما‌گستر", "پخش ستاره‌ی شب"],
+        "assets": ["استودیوی مرکزی", "پلتفرم پخش آنلاین", "زنجیره‌ی سینماها", "واحد جلوه‌های ویژه"],
+        "orgs": ["سازمان سینمایی", "شورای صنفی نمایش"] + ORGS_GENERIC[:2],
+        "issues": ["تأخیر تو فیلم‌برداری", "افزایش هزینه‌ی بازیگران", "مشکل مجوز پخش"],
+        "price_up": ["فروش گیشه‌ی فیلم‌های جدید رکورد زد",
+                     "تعداد مشترکین پلتفرم‌های پخش آنلاین رشد کرد"],
+        "price_down": ["فروش گیشه تو هفته‌ی گذشته افت کرد",
+                       "فصل بی‌رمقی برای سینماست؛ مخاطبا به پلتفرم‌های رقیب رفتن"],
+        "accidents": ["آتش‌سوزی تو {asset} {co}؛ فیلم‌برداری چند فیلم متوقف شد",
+                      "لو رفتن صحنه‌های فیلم پرفروش {co} قبل از اکران",
+                      "مشکل فنی تو {asset} {co}؛ پخش چند ساعت قطع شد"],
+        "techs": ["{co} از هوش مصنوعی برای کاهش هزینه‌ی جلوه‌های ویژه تو {asset} استفاده کرد",
+                  "{co} فناوری نمایش جدید با کیفیت بالاتر رو تو سینماهاش نصب کرد"],
+        "special": [
+            ("فیلم پرفروش", +1, (0.06, 0.12), (0.04, 0.08), ["فیلم جدید {co} تو هفته‌ی اول اکران رکورد فروش زد"]),
+            ("شکست گیشه", -1, (0.05, 0.10), (0.03, 0.07), ["فیلم پرهزینه‌ی {co} فروش ضعیفی داشت و تحلیلگرا پیش‌بینی زیان می‌کنن"]),
+            ("قرارداد پخش", +1, (0.03, 0.08), (0.03, 0.06), ["{co} قرارداد پخش بین‌المللی با {partner} امضا کرد"]),
+        ],
+        "macro": {"rate_up": 0.8, "rate_down": 0.8, "inflation": -0.4, "tension": -0.3, "heatwave": 0.3, "demand_drop": 0.9, "boom": 1.0, "recession": 1.0},
+    },
+}
+
+# ---------- قالب‌های عمومی: (id، وزن، علامت، بازه‌ی بنیاد، بازه‌ی حال‌وهوا، توضیح کوتاه، قالب‌ها، شایعه‌پذیر) ----------
+# علامت 0 = خنثی/مبهم (اثر خیلی کوچیک، جهت رندوم).  یه قالب با "sector:کلید" یعنی از لیست خود صنعت برداشته بشه.
+EVENTS = [
+    ("ceo_resign", 7, -1, (0.04, 0.09), (0.03, 0.07), "استعفای مدیرعامل",
+     ["{ceo}، مدیرعامل {co}، از سمتش استعفا داد؛ {reason}",
+      "استعفای ناگهانی {ceo} از ریاست {co} بازار رو غافل‌گیر کرد؛ {reason}",
+      "{co} رسماً اعلام کرد {ceo} دیگه مدیرعامل نیست؛ {reason}"], True),
+    ("exec_hire", 4, +1, (0.02, 0.05), (0.02, 0.04), "جذب مدیر ارشد",
+     ["{co} یه مدیر ارشد باسابقه از {partner} جذب کرد", "{co} معاونت جدیدی برای توسعه‌ی بازار ساخت و مدیرش رو معرفی کرد"], False),
+    ("contract_win", 8, +1, (0.04, 0.09), (0.03, 0.06), "قرارداد جدید",
+     ["{co} قرارداد {num2} میلیون سانتی تأمین {item} با {partner} بست",
+      "{partner} {co} رو برای تأمین بلندمدت {item} انتخاب کرد"], True),
+    ("contract_lost", 6, -1, (0.04, 0.09), (0.03, 0.06), "از دست رفتن قرارداد",
+     ["{partner} قرارداد تأمین {item} رو از {co} پس گرفت و به رقیب داد",
+      "{co} تو مناقصه‌ی تأمین {item} بازنده شد"], True),
+    ("output_up", 7, +1, (0.03, 0.07), (0.02, 0.05), "افزایش تولید",
+     ["تولید {asset} {co} به {num} {unit} رسید؛ بالاترین رقم {n} ماه اخیر",
+      "{co} از افزایش {pct}٪ی تولید تو {asset} خبر داد"], False),
+    ("output_down", 7, -1, (0.03, 0.08), (0.02, 0.05), "افت تولید",
+     ["تولید {asset} {co} بعد از {issue} {pct}٪ افت کرد", "{co} به‌خاطر {issue} پیش‌بینی تولیدش رو پایین آورد"], True),
+    ("accident", 5, -1, (0.05, 0.11), (0.04, 0.08), "حادثه", ["sector:accidents"], False),
+    ("reg_tight", 5, -1, (0.03, 0.07), (0.02, 0.05), "قوانین سخت‌گیرانه‌تر",
+     ["{org} قوانین جدیدی برای حوزه‌ی {label} تصویب کرد؛ هزینه‌ی تولید بالا می‌ره",
+      "{org} مالیات تازه‌ای روی فعالان حوزه‌ی {label} پیشنهاد داد"], True),
+    ("reg_ease", 5, +1, (0.03, 0.07), (0.02, 0.05), "تسهیل مقررات",
+     ["{org} معافیت‌های تازه‌ای برای حوزه‌ی {label} اعلام کرد", "{org} روند صدور مجوزها رو برای {label} سریع‌تر کرد"], True),
+    ("price_up", 8, +1, (0.03, 0.07), (0.03, 0.06), "رشد قیمت جهانی", ["sector:price_up"], False),
+    ("price_down", 8, -1, (0.03, 0.07), (0.03, 0.06), "افت قیمت جهانی", ["sector:price_down"], False),
+    ("audit_clean", 3, +1, (0.02, 0.04), (0.02, 0.04), "حسابرسی تمیز",
+     ["حسابرس مستقل صورت‌های مالی {co} رو بدون مغایرت تأیید کرد"], False),
+    ("audit_trouble", 4, -1, (0.03, 0.07), (0.03, 0.06), "هشدار حسابرس",
+     ["حسابرس مستقل درباره‌ی بدهی‌های {co} هشدار داد", "تو گزارش حسابرسی {co} چند «تحفظ» جدی ثبت شد"], True),
+    ("lawsuit", 4, -1, (0.03, 0.07), (0.03, 0.05), "شکایت",
+     ["{partner} از {co} به‌خاطر نقض قرارداد شکایت کرد", "پرونده‌ی حقوقی تازه‌ای علیه {co} باز شد"], True),
+    ("strike", 4, -1, (0.03, 0.06), (0.02, 0.05), "اعتصاب",
+     ["کارکنان {asset} {co} به‌خاطر {strike} دست از کار کشیدن"], False),
+    ("new_tech", 5, +1, (0.03, 0.07), (0.02, 0.05), "فناوری جدید", ["sector:techs"], False),
+    ("partnership", 5, +1, (0.03, 0.07), (0.02, 0.05), "همکاری جدید",
+     ["{co} و {partner} تفاهم‌نامه‌ی همکاری امضا کردن"], True),
+    ("dividend_up", 4, +1, (0.03, 0.06), (0.03, 0.05), "سود نقدی بالا",
+     ["{co} سود نقدی بیشتر از انتظار تحلیلگرا اعلام کرد"], False),
+    ("dividend_cut", 4, -1, (0.03, 0.06), (0.03, 0.05), "کاهش سود نقدی",
+     ["{co} سود نقدی امسال رو کاهش داد"], False),
+    ("cyber", 3, -1, (0.03, 0.07), (0.03, 0.06), "حمله‌ی سایبری",
+     ["حمله‌ی سایبری به سامانه‌های {co}؛ {cyber}"], False),
+    ("analyst_up", 5, +1, (0.02, 0.05), (0.03, 0.05), "ارتقای تحلیلگران",
+     ["{firm} توصیه‌ی سهام {co} رو به «خرید» ارتقا داد"], False),
+    ("analyst_down", 5, -1, (0.02, 0.05), (0.03, 0.05), "تنزل تحلیلگران",
+     ["{firm} توصیه‌ی سهام {co} رو به «فروش» تنزل داد"], False),
+    ("expansion", 4, +1, (0.03, 0.07), (0.02, 0.05), "طرح توسعه",
+     ["{co} برای توسعه‌ی {asset} {num2} میلیون سانت سرمایه‌گذاری کرد"], True),
+    ("insider_sell", 3, -1, (0.02, 0.05), (0.02, 0.04), "فروش سهام مدیران",
+     ["مدیران ارشد {co} بخشی از سهم‌شون رو فروختن"], False),
+    ("insider_buy", 3, +1, (0.02, 0.05), (0.02, 0.04), "خرید سهام مدیران",
+     ["مدیران ارشد {co} سهم تازه خریدن؛ بازار اینو نشونه‌ی اعتماد می‌دونه"], False),
+    # --- خنثی / مبهم ---
+    ("neutral", 9, 0, (0.0, 0.006), (0.0, 0.012), "خبر عادی",
+     ["مجمع عمومی {co} برگزار شد؛ تصمیم خاصی گرفته نشد",
+      "{ceo} تو مصاحبه‌ای گفت «بازار پیچیده‌ست» و جزئیاتی نداد",
+      "گزارش فصلی {co} تقریباً مطابق پیش‌بینی بود",
+      "{org} از {asset} {co} بازدید کرد؛ نتیجه فعلاً اعلام نشده",
+      "{co} لوگوی جدیدش رو رونمایی کرد",
+      "نشست هم‌اندیشی فعالان حوزه‌ی {label} بدون نتیجه‌ی مشخص تموم شد"], False),
+    ("mixed", 6, 0, (0.008, 0.025), (0.01, 0.025), "خبر دوپهلو",
+     ["{co} هم درآمد بیشتر هم هزینه‌ی بیشتر گزارش کرد؛ تحلیلگرا دو دسته شدن",
+      "{co} تولیدش رو بالا برد ولی قیمت فروش پایین اومد؛ اثر خالص نامشخصه",
+      "{ceo} از «سال پر از فرصت و ریسک» حرف زد؛ بازار تفسیر یکسانی نداره"], False),
+]
+EVENTS_BY_ID = {e[0]: e for e in EVENTS}
+
+# ---------- اخبار کلان: روی همه‌ی کوین‌ها، با ضریب اثر هر صنعت ----------
+# (id، وزن، علامت پایه، بازه‌ی بنیاد، بازه‌ی حال‌وهوا، متن، ضریب هر صنعت)
+MACRO_EVENTS = [
+    ("rate_up", 4, -1, (0.02, 0.05), (0.02, 0.04), "بانک مرکزی نرخ بهره رو بالا برد؛ سرمایه از دارایی‌های پرریسک فرار می‌کنه", {"BTK": 1, "ETK": 1, "BGT": 0.4}),
+    ("rate_down", 4, +1, (0.02, 0.05), (0.02, 0.04), "بانک مرکزی نرخ بهره رو پایین آورد؛ بازار نفس راحت کشید", {"BTK": 1, "ETK": 1, "BGT": 0.6}),
+    ("inflation", 4, +1, (0.02, 0.05), (0.02, 0.04), "تورم از انتظار بیشتر شد؛ دارایی‌های ملموس مثل طلا طرف‌دار پیدا کردن", {"BTK": 0.3, "ETK": -0.6, "BGT": 1}),
+    ("tension", 3, +1, (0.03, 0.06), (0.03, 0.05), "تنش‌های منطقه‌ای بالا گرفت؛ قیمت انرژی و طلا حساس شدن", {"BTK": 1, "ETK": 0.1, "BGT": 0.8}),
+    ("heatwave", 3, +1, (0.02, 0.05), (0.02, 0.04), "موج گرمای شدید مصرف انرژی رو بالا برد", {"BTK": 0.5, "ETK": 1, "BGT": 0}),
+    ("demand_drop", 3, -1, (0.02, 0.05), (0.02, 0.04), "گزارش‌ها از افت تقاضای جهانی خبر می‌دن؛ صنایع پایه تحت فشارن", {"BTK": 1, "ETK": 0.5, "BGT": -0.4}),
+    ("boom", 3, +1, (0.02, 0.04), (0.02, 0.04), "رشد اقتصادی از انتظار بهتر شد؛ بازار خوش‌بینه", {"BTK": 1, "ETK": 0.8, "BGT": 0.5}),
+    ("recession", 3, -1, (0.02, 0.05), (0.03, 0.05), "نشانه‌های رکود تو شاخص‌های اقتصادی دیده می‌شه", {"BTK": 1, "ETK": 0.7, "BGT": 0.2}),
+]
+SECTOR_LINKS = {"BTK": {"ETK": -0.20, "BGT": 0.10}, "ETK": {"BGT": -0.10, "BTK": 0.05}, "BGT": {"BTK": 0.05},
+                "WPS": {"PNK": 0.10}, "PNK": {"WPS": 0.10}, "HLY": {"PNK": -0.05}}   # سرریز اثر خبر یه کوین روی بقیه (کوچیک و بدون خبر جدا)
+NEWS_IMPACT_DELAY = (8 * 60, 12 * 60)   # بعد از انتشار خبر، بازیکنا ~۱۰ دقیقه وقت دارن پوزیشن ببندن؛ بعدش اثر یهویی میاد
+NEWS_KICK_COEF = 0.5             # جهش قیمت = (اثر بنیاد + اثر حال‌وهوا) × این ضریب
+NEWS_KICK_CAP = 0.08             # سقف جهش یهویی
+
+_RECENT_EVENTS = {}   # chat_id -> لیست اخیر
+_CEO_LOCK = {}        # (chat_id, company) -> تا کِی نمی‌شه دوباره استعفا داد
+
+def person_name():
+    return f"{random.choice(FIRST_NAMES)} {random.choice(LAST_NAMES)}"
+
+def fund_get(chat_id, sym):
+    row = c.execute("SELECT fund FROM crypto_fund WHERE chat_id=? AND coin=?", (chat_id, sym)).fetchone()
+    return row[0] if row else 1.0
+
+def fund_add(chat_id, sym, delta):
+    c.execute("INSERT OR IGNORE INTO crypto_fund(chat_id,coin) VALUES(?,?)", (chat_id, sym))
+    c.execute("UPDATE crypto_fund SET fund=MAX(?, MIN(?, fund+?)) WHERE chat_id=? AND coin=?", (FUND_MIN, FUND_MAX, delta, chat_id, sym))
+
+def fund_decay(chat_id, dt):
+    """بنیاد کوین‌ها به‌آرومی به ۱ برمی‌گرده (شوک‌های قدیمی فراموش می‌شن)."""
+    k = 0.5 ** (dt / FUND_HALFLIFE)
+    c.execute("UPDATE crypto_fund SET fund = 1 + (fund-1)*? WHERE chat_id=?", (k, chat_id))
+
+def add_volume(chat_id, sym, amount):
+    c.execute("INSERT OR IGNORE INTO crypto_fund(chat_id,coin) VALUES(?,?)", (chat_id, sym))
+    c.execute("UPDATE crypto_fund SET vol=vol+? WHERE chat_id=? AND coin=?", (abs(amount), chat_id, sym))
+
+def ceo_get(chat_id, company):
+    row = c.execute("SELECT name FROM crypto_ceo WHERE chat_id=? AND company=?", (chat_id, company)).fetchone()
+    if row:
+        return row[0]
+    name = person_name()
+    c.execute("INSERT INTO crypto_ceo(chat_id,company,name) VALUES(?,?,?)", (chat_id, company, name))
+    return name
+
+def trade_sentiment(p0, p1, k):
+    """اثر معامله‌ی بازیکن روی حال‌وهوا با سقف؛ یه نهنگ نمی‌تونه حال‌وهوای بازار رو به‌تنهایی منفجر کنه."""
+    return max(-CRYPTO_SENT_TRADE_CAP, min(CRYPTO_SENT_TRADE_CAP, k * (p1 / p0 - 1)))
+
+def news_price_kick(chat_id, sym, pct):
+    """جهش یهویی قیمت وقتی اثر خبر می‌رسه (~۱۰ دقیقه بعد از انتشار): «معامله‌گرای خبری» تا سقف سرمایه‌ی ربات‌های بازارساز
+    قیمت رو تو جهت خبر هل می‌ده. بعدش ربات‌های عادی حرکت رو ادامه می‌دن."""
+    pct = max(-NEWS_KICK_CAP, min(NEWS_KICK_CAP, pct))
+    pool = pool_get(chat_id, sym)
+    npc = c.execute("SELECT cm,qty FROM crypto_npc WHERE chat_id=? AND coin=?", (chat_id, sym)).fetchone()
+    if not pool or not npc or abs(pct) < 0.0005:
+        return
+    cm, q = pool
+    ncm, nq = npc
+    k = cm * q
+    new_cm = math.sqrt(k * (cm / q) * (1 + pct))
+    if new_cm > cm:
+        need = min(new_cm - cm, ncm)
+        if need <= 0.01:
+            return
+        coin_out = q - k / (cm + need)
+        pool_set(chat_id, sym, cm + need, q - coin_out)
+        c.execute("UPDATE crypto_npc SET cm=?, qty=? WHERE chat_id=? AND coin=?", (ncm - need, nq + coin_out, chat_id, sym))
+    else:
+        qty_in = min(k / new_cm - q, nq)
+        if qty_in <= 1e-9:
+            return
+        cm_out = cm - k / (q + qty_in)
+        pool_set(chat_id, sym, cm - cm_out, q + qty_in)
+        c.execute("UPDATE crypto_npc SET cm=?, qty=? WHERE chat_id=? AND coin=?", (ncm + cm_out, nq - qty_in, chat_id, sym))
+
+def ensure_min_depth(chat_id):
+    """استخرهای کم‌عمق‌تر از عمق هدف (گروه‌های قدیمی) یک‌بار عمیق می‌شن. قیمت عوض نمی‌شه؛ سرمایه‌ی ربات‌ها هم هم‌نسبت بزرگ می‌شه."""
+    for sym, cfg in COINS.items():
+        pool = pool_get(chat_id, sym)
+        if not pool or pool[0] >= cfg["depth"]:
+            continue
+        cm, q = pool
+        f = cfg["depth"] / cm
+        c.execute("UPDATE crypto_pools SET cm=?, qty=? WHERE chat_id=? AND coin=?", (cm * f, q * f, chat_id, sym))
+        c.execute("UPDATE crypto_npc SET cm=cm*?, qty=qty*? WHERE chat_id=? AND coin=?", (f, f, chat_id, sym))
+
+def liquidity_step(chat_id):
+    """هر قدم (۱۰ دقیقه) عمق استخر کمی بیشتر می‌شه: بیشتر معامله = نقدینگی بیشتر. قیمت عوض نمی‌شه (سانت و کوین هم‌نسبت اضافه می‌شن)؛
+    سرمایه‌ی ربات‌های بازارساز هم با همین نسبت بزرگ می‌شه. این نقدینگی «ارائه‌دهنده‌های ناشناس» ـه و سانت تازه به اقتصاد وارد می‌شه."""
+    for sym, cfg in COINS.items():
+        pool = pool_get(chat_id, sym)
+        row = c.execute("SELECT vol FROM crypto_fund WHERE chat_id=? AND coin=?", (chat_id, sym)).fetchone()
+        if not pool:
+            continue
+        cm, q = pool
+        vol = row[0] if row else 0.0
+        room = cfg["depth"] * LIQ_MAX_MULT - cm
+        add = min(room, vol * LIQ_VOL_RATE + cm * LIQ_BASE_RATE)
+        if add > 0.01:
+            f = (cm + add) / cm
+            pool_set(chat_id, sym, cm + add, q * f)
+            c.execute("UPDATE crypto_npc SET cm=cm*?, qty=qty*? WHERE chat_id=? AND coin=?", (f, f, chat_id, sym))
+        c.execute("UPDATE crypto_fund SET vol=0 WHERE chat_id=? AND coin=?", (chat_id, sym))
+
+# ---------- تولید و انتشار خبر ----------
+def _num_slots(sector):
+    lo, hi = sector["num"]
+    return {"num": random.randint(lo, hi), "num2": random.randint(5, 80), "n": random.choice([3, 6, 9, 12]), "pct": random.randint(4, 25)}
+
+def _fill(chat_id, sym, tpl, co, ceo=None):
+    sec = SECTORS[sym]
+    if tpl.startswith("sector:"):
+        tpl = random.choice(sec[tpl.split(":", 1)[1]])
+    slots = dict(co=co, ceo=ceo or ceo_get(chat_id, co), asset=random.choice(sec["assets"]), item=sec["item"], unit=sec["unit"],
+                 label=sec["label"], org=random.choice(sec["orgs"]), partner=random.choice(PARTNERS), firm=random.choice(FIRMS),
+                 issue=random.choice(sec["issues"]), strike=random.choice(STRIKE_REASONS), cyber=random.choice(CYBER_NOTES),
+                 reason=random.choice(REASONS_RESIGN), **_num_slots(sec))
+    return tpl.format(**slots)
+
+def _header(sym, macro=False):
+    if macro:
+        return "📰 🌍 اقتصاد کلان"
+    cfg = COINS[sym]
+    return f"📰 {cfg['emoji']} {sym} | {SECTORS[sym]['emoji']} {SECTORS[sym]['label']}"
+
+def _schedule(chat_id, sym, when, d_fund, d_sent, text=None, kick=0.0):
+    c.execute("INSERT INTO crypto_effects(chat_id,coin,apply_ts,d_fund,d_sent,text,done,kick) VALUES(?,?,?,?,?,?,0,?)",
+              (chat_id, sym, int(when), d_fund, d_sent, text, kick))
+
+def _stage_effects(chat_id, sym, now, d_fund, d_sent, spill=True):
+    """خبر همین الان منتشر می‌شه ولی هیچ اثری رو قیمت نداره؛ ~۱۰ دقیقه بعد (رندوم ۸ تا ۱۲) اثرش یهویی میاد
+    تا بازیکنا فرصت داشته باشن بخرن/بفروشن و پوزیشن ببندن. به کوین‌های هم‌خانواده هم کمی سرریز می‌کنه (آرومتر، بدون جهش)."""
+    due = now + random.uniform(*NEWS_IMPACT_DELAY)
+    _schedule(chat_id, sym, due, d_fund, d_sent, None, (d_fund + d_sent) * NEWS_KICK_COEF)
+    if spill:
+        for other, coef in SECTOR_LINKS.get(sym, {}).items():
+            if other in COINS:
+                _schedule(chat_id, other, due + random.uniform(10, 40) * 60, d_fund * coef * 0.5, d_sent * coef)
+
+def _pick_event(chat_id, sym):
+    fund = fund_get(chat_id, sym)
+    p_pos = max(0.2, min(0.8, 0.5 - 1.5 * (fund - 1)))   # بنیاد بالا → خبر بد محتمل‌تر؛ بنیاد پایین → خبر خوب محتمل‌تر
+    recent = _RECENT_EVENTS.setdefault(chat_id, [])
+    pool, weights = [], []
+    sec = SECTORS[sym]
+    for e in EVENTS + [("sp_" + s[0], 3, s[1], s[2], s[3], s[0], s[4], False) for s in sec["special"]]:
+        key = (sym, e[0])
+        w = e[1] * (0.15 if key in recent else 1.0)
+        w *= p_pos if e[2] > 0 else (1 - p_pos) if e[2] < 0 else 0.5
+        pool.append(e)
+        weights.append(max(w, 0.01))
+    return random.choices(pool, weights)[0], recent
+
+def publish_news(chat_id, force_sym=None, now=None):
+    """یه خبر می‌سازه، اثرش رو زمان‌بندی می‌کنه و خروجی: لیست متن‌های آماده‌ی ارسال."""
+    crypto_init(chat_id)
+    now = now or int(time.time())
+    out = []
+    if force_sym is None and random.random() < NEWS_MACRO_PROB:
+        mid, _w, sign, frange, srange, text, betas = random.choices(MACRO_EVENTS, [m[1] for m in MACRO_EVENTS])[0]
+        mag = random.uniform(0.6, 1.5)
+        for sym in COINS:
+            beta = betas.get(sym, SECTORS[sym].get("macro", {}).get(mid, 0))
+            if beta:
+                df, ds = sign * beta * random.uniform(*frange) * mag, sign * beta * random.uniform(*srange) * mag
+                _stage_effects(chat_id, sym, now, df, ds, spill=False)
+        txt = f"{_header(None, True)}\n{text}"
+        add_news(chat_id, txt)
+        out.append(txt)
+        db.commit()
+        return out
+    syms = list(COINS)
+    if force_sym in COINS:
+        sym = force_sym
+    else:
+        ws = []
+        for s in syms:
+            row = c.execute("SELECT last_news FROM crypto_fund WHERE chat_id=? AND coin=?", (chat_id, s)).fetchone()
+            hours = max(0.0, (now - (row[0] if row and row[0] else now - 6 * 3600)) / 3600)
+            ws.append(1 + min(hours, 6) / 3)   # کوینی که دیرتر خبر داشته شانس بیشتری داره
+        sym = random.choices(syms, ws)[0]
+    (eid, _w, sign, frange, srange, short, templates, rumorable), recent = _pick_event(chat_id, sym)
+    sec = SECTORS[sym]
+    co = random.choice(sec["companies"])
+    lock = _CEO_LOCK.get((chat_id, co), 0)
+    if eid == "ceo_resign" and lock > now:
+        (eid, _w, sign, frange, srange, short, templates, rumorable) = EVENTS_BY_ID["neutral"]
+    recent.append((sym, eid))
+    del recent[:-NEWS_RECENT_MEMORY]
+    c.execute("INSERT OR IGNORE INTO crypto_fund(chat_id,coin) VALUES(?,?)", (chat_id, sym))
+    c.execute("UPDATE crypto_fund SET last_news=? WHERE chat_id=? AND coin=?", (now, chat_id, sym))
+    if sign == 0:
+        sign = random.choice([-1, 1])
+    mag = random.uniform(0.6, 1.5)
+    d_fund = sign * random.uniform(*frange) * mag
+    d_sent = sign * random.uniform(*srange) * mag
+    if abs(d_fund) < 0.08 and random.random() < NEWS_SURPRISE_PROB:
+        d_sent *= -0.6   # «فروش خبر»: بنیاد همون می‌مونه ولی واکنش کوتاه‌مدت برعکسه
+    ceo = ceo_get(chat_id, co)
+    body = _fill(chat_id, sym, random.choice(templates), co, ceo)
+    if rumorable and random.random() < NEWS_RUMOR_PROB:
+        body = body.replace("رسماً اعلام کرد", "ظاهراً اعلام کرده")
+        lead = random.choice(["طبق گزارش‌های تأییدنشده:", "منابع ناشناس می‌گن:", "تو محافل بازار پیچیده که", "شایعه شده که"])
+        txt = f"{_header(sym)}\n🕵️ {lead} {body}"
+        add_news(chat_id, txt)
+        out.append(txt)
+        _schedule(chat_id, sym, now + random.uniform(*NEWS_IMPACT_DELAY), 0.0, d_sent * 0.3, None, d_sent * 0.15)   # شایعه فقط حال‌وهوا رو کمی تکون می‌ده
+        due = now + random.randint(2, 6) * 3600
+        if random.random() < RUMOR_TRUE_PROB:
+            ftxt = f"{_header(sym)}\n✅ تأیید شد: خبر «{short}» در {co} درست بود"
+            _schedule(chat_id, sym, due, d_fund, d_sent * 0.7, ftxt, (d_fund + d_sent * 0.7) * NEWS_KICK_COEF)
+        else:
+            ftxt = f"{_header(sym)}\n❌ تکذیب شد: خبر «{short}» در {co} صحت نداشت"
+            _schedule(chat_id, sym, due, 0.0, -d_sent * 0.3, ftxt, -d_sent * 0.15)
+    else:
+        txt = f"{_header(sym)}\n{body}"
+        add_news(chat_id, txt)
+        out.append(txt)
+        _stage_effects(chat_id, sym, now, d_fund, d_sent)
+        if eid == "ceo_resign":   # جانشین چند ساعت بعد معرفی می‌شه
+            new = person_name()
+            c.execute("UPDATE crypto_ceo SET name=? WHERE chat_id=? AND company=?", (new, chat_id, co))
+            due = now + random.randint(2, 8) * 3600
+            _CEO_LOCK[(chat_id, co)] = due + 3600
+            ftxt = f"{_header(sym)}\n🆕 {new} به‌عنوان مدیرعامل جدید {co} معرفی شد؛ {random.choice(APPOINT_NOTES)}"
+            _schedule(chat_id, sym, due, abs(d_fund) * 0.3, abs(d_sent) * 0.4, ftxt, (abs(d_fund) * 0.3 + abs(d_sent) * 0.4) * NEWS_KICK_COEF)
+    db.commit()
+    return out
+
+def news_apply_due(chat_id, now=None):
+    """اثرهای زمان‌بندی‌شده‌ی سررسیده (مراحل بعدی خبرها، تأیید/تکذیب شایعه‌ها، جانشین مدیرعامل) رو اعمال می‌کنه. خروجی: خبرهای تازه."""
+    now = now or int(time.time())
+    out = []
+    rows = c.execute("SELECT id,coin,d_fund,d_sent,text,kick FROM crypto_effects WHERE chat_id=? AND done=0 AND apply_ts<=? ORDER BY apply_ts",
+                     (chat_id, now)).fetchall()
+    for eid, sym, df, ds, text, kick in rows:
+        if sym in COINS:
+            fund_add(chat_id, sym, df)
+            add_sentiment(chat_id, sym, ds)
+            if kick:
+                news_price_kick(chat_id, sym, kick)   # جهش یهویی
+        if text:
+            add_news(chat_id, text)
+            out.append(text)
+        c.execute("UPDATE crypto_effects SET done=1 WHERE id=?", (eid,))
+    c.execute("DELETE FROM crypto_effects WHERE done=1 AND apply_ts<?", (now - 86400,))
+    return out
+
+def news_is_quiet(now=None):
+    h = (((now or int(time.time())) + NEWS_TZ_OFFSET) // 3600) % 24
+    return NEWS_QUIET_HOURS[0] <= h < NEWS_QUIET_HOURS[1]
+
+async def crypto_news_loop(bot):
+    """هر ~۱ ساعت (با جابه‌جایی رندوم) برای هر گروه یه خبر پخش می‌کنه؛ بعضی ساعت‌ها خبر نیست، بعضی ساعت‌ها دو تاست، شب‌ها سکوته."""
+    while True:
+        await asyncio.sleep(random.uniform(NEWS_INTERVAL * 0.85, NEWS_INTERVAL * 1.15))
+        try:
+            if news_is_quiet():
+                continue
+            chats = [r[0] for r in c.execute("SELECT DISTINCT chat_id FROM crypto_pools").fetchall()]
+            for chat_id in chats:
+                if random.random() < NEWS_SKIP_PROB:
+                    continue
+                try:
+                    texts = publish_news(chat_id)
+                    if random.random() < NEWS_DOUBLE_PROB:
+                        texts += publish_news(chat_id)
+                    for t in texts:
+                        await bot.send_message(chat_id, t)
+                        await asyncio.sleep(random.uniform(1, 4))
+                except (TelegramForbiddenError, TelegramBadRequest):
+                    logger.warning("news loop: can't post to chat %s", chat_id)
+                except Exception:
+                    logger.exception("crypto_news_loop chat %s error", chat_id)
+                await asyncio.sleep(random.uniform(0, 15))
+        except Exception:
+            logger.exception("crypto_news_loop error")
+
+async def crypto_effect_loop(bot):
+    """هر ۱۵ ثانیه چک می‌کنه اثر کدوم خبرها سررسیده (~۱۰ دقیقه بعد از انتشار) و اعمالشون می‌کنه؛ تأیید/تکذیب شایعه و معرفی جانشین رو هم همین‌جا می‌فرسته."""
+    while True:
+        await asyncio.sleep(15)
+        try:
+            now = int(time.time())
+            chats = [r[0] for r in c.execute("SELECT DISTINCT chat_id FROM crypto_effects WHERE done=0 AND apply_ts<=?", (now,)).fetchall()]
+            for chat_id in chats:
+                try:
+                    texts = news_apply_due(chat_id, now)
+                    db.commit()
+                    for t in texts:
+                        await bot.send_message(chat_id, t)
+                except (TelegramForbiddenError, TelegramBadRequest):
+                    logger.warning("effect loop: can't post to chat %s", chat_id)
+                except Exception:
+                    logger.exception("crypto_effect_loop chat %s error", chat_id)
+        except Exception:
+            logger.exception("crypto_effect_loop error")
+
+@dp.message(Command("forcenews"))
+async def force_news_cmd(m: Message):
+    """ادمین: /forcenews [BTK|ETK|BGT|WPS|PNK|HLY] → همین الان یه خبر پخش می‌شه (برای تست)."""
+    if m.from_user.id not in ADMIN_IDS or m.chat.type == "private":
+        return
+    args = (m.text or "").split()
+    sym = args[1].upper() if len(args) > 1 else None
+    for t in publish_news(m.chat.id, force_sym=sym):
+        await m.bot.send_message(m.chat.id, t)
+
 
 # ---------- حزب‌ها ----------
 def party_tag(sym):
@@ -4515,7 +5103,7 @@ CRYPTO_CD = {}  # (chat_id, user_id) -> آخرین معامله
 
 def parse_coin(arg):
     arg = (arg or "").strip()
-    sym = COIN_ALIASES.get(arg) or arg.upper()
+    sym = COIN_ALIASES.get(arg) or COIN_ALIASES.get(arg.lower()) or arg.upper()
     return sym if sym in COINS else None
 
 def coins_txt():
@@ -4524,7 +5112,11 @@ def coins_txt():
 def crypto_cd_left(chat_id, uid):
     return int(CRYPTO_CD.get((chat_id, uid), 0) + CRYPTO_COOLDOWN - time.time())
 
-def crypto_sparkline(prices):
+SPARK_WIDTH = 24   # حداکثر طول یه خط چارت متنی؛ از این بیشتر نمی‌شه تا تو تلگرام به خط بعد نره و تو‌هم نشه
+
+def crypto_sparkline(prices, width=SPARK_WIDTH):
+    # چارت متنی یه‌خطی: وقتی خط پر شد قدیمی‌ترین نقطه‌ها حذف می‌شن و نقطه‌ی جدید جاشون میاد (پنجره‌ی لغزان)، نه اینکه خط بعدی بیاد
+    prices = prices[-width:]
     blocks = "▁▂▃▄▅▆▇█"
     lo, hi = min(prices), max(prices)
     if hi - lo < 1e-9:
@@ -4547,7 +5139,12 @@ def crypto_chart_png(sym, rows):
         ax.fill_between(xs, ys, min(ys), color=color, alpha=0.12, step="post")
         ax.set_title(f"{sym} / cm   last: {ys[-1]:,.2f}")
         ax.grid(alpha=0.25)
-        fig.autofmt_xdate()
+        import matplotlib.dates as mdates
+        for _ax in ([ax]):
+            _loc = mdates.AutoDateLocator(minticks=3, maxticks=6)
+            _ax.xaxis.set_major_locator(_loc)
+            _ax.xaxis.set_major_formatter(mdates.ConciseDateFormatter(_loc))
+
         fig.tight_layout()
         buf = io.BytesIO()
         fig.savefig(buf, format="png")
@@ -4782,7 +5379,7 @@ async def crypto_chart_cmd(m: Message):
     png = await asyncio.to_thread(crypto_chart_png, sym, rows) if len(rows) >= 2 else None
     if png:
         return await m.bot.send_photo(m.chat.id, BufferedInputFile(png, filename=f"{sym}.png"), caption=caption)
-    spark = crypto_sparkline(prices[-40:]) if prices else ""
+    spark = crypto_sparkline(prices) if prices else ""
     await m.reply(caption + (f"\n\n{spark}" if spark else "\n\n(هنوز داده‌ی کافی برای چارت نیست.)"))
 
 @dp.message(Command("cwallet"))
@@ -4865,7 +5462,7 @@ async def crypto_news_cmd(m: Message):
     if not ids:
         return
     chat_id, _uid = ids
-    rows = c.execute("SELECT ts, text FROM crypto_news WHERE chat_id=? ORDER BY ts DESC LIMIT 8", (chat_id,)).fetchall()
+    rows = c.execute("SELECT ts, text FROM crypto_news WHERE chat_id=? ORDER BY ts DESC LIMIT 5", (chat_id,)).fetchall()
     if not rows:
         return await m.reply("📰 هنوز خبری نیست. خبرها از معامله‌های سنگین، تزریق و ورود یا نقد شدن شرکت‌های حزب‌ها ساخته می‌شن.")
     now = int(time.time())
@@ -4904,7 +5501,11 @@ def crypto_multi_chart_png(series, hours):
             ax.tick_params(colors="#aaaaaa", labelsize=8)
             for sp in ax.spines.values():
                 sp.set_color("#333842")
-        fig.autofmt_xdate()
+        import matplotlib.dates as mdates
+        for _ax in (axes):
+            _loc = mdates.AutoDateLocator(minticks=3, maxticks=6)
+            _ax.xaxis.set_major_locator(_loc)
+            _ax.xaxis.set_major_formatter(mdates.ConciseDateFormatter(_loc))
         fig.tight_layout()
         buf = io.BytesIO()
         fig.savefig(buf, format="png", facecolor=fig.get_facecolor())
@@ -5071,6 +5672,8 @@ async def main():
     asyncio.create_task(auction_loop(bot))
     asyncio.create_task(wealth_tax_loop(bot))
     asyncio.create_task(crypto_market_loop(bot))
+    asyncio.create_task(crypto_news_loop(bot))
+    asyncio.create_task(crypto_effect_loop(bot))
     await dp.start_polling(bot)
 
 if __name__=="__main__":
